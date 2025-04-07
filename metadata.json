@@ -1,16 +1,16 @@
 {
-    "id": "mododactyl",
-    "name": "Mododactyl",
-    "prefix": "bearo",
-    "author": [
-        "The Motherfucking Bearodactyl"
-    ],
-    "description": "woah",
-    "main_file": "src/main.lua",
-    "badge_colour": "ff00bb",
-    "version": "0.1.0",
-    "dependencies": [
-        "Steamodded (>=1.0.0~BETA-0312b)",
-        "Lovely (>=0.7.1)"
-    ]
+  "id": "insolence",
+  "name": "Insolence.",
+  "prefix": "bearo",
+  "author": [
+    "The Motherfucking Bearodactyl"
+  ],
+  "description": "woah",
+  "main_file": "src/main.lua",
+  "badge_colour": "ff00bb",
+  "version": "0.1.0",
+  "dependencies": [
+    "Steamodded (>=1.0.0~BETA-0312b)",
+    "Lovely (>=0.7.1)"
+  ]
 }

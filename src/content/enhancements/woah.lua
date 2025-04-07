@@ -1,9 +1,9 @@
-local woah_sfx = SMODS.Sound {
+SMODS.Sound {
     key = "woah",
     path = "woah.ogg",
 }
 
-BEARO.ENHANCEMENTS.woah = SMODS.Enhancement {
+BEARO.woah = SMODS.Enhancement {
     key = "woah_enh",
     atlas = "enhancements",
     config = {

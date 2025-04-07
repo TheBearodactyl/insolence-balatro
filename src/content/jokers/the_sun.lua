@@ -1,4 +1,4 @@
-BEARO.JOKERS.nice_day_out = SMODS.Joker {
+SMODS.Joker {
     key = "the_sun",
     config = {
         extra = {
@@ -57,5 +57,3 @@ BEARO.JOKERS.nice_day_out = SMODS.Joker {
         end
     end
 }
-
-return BEARO.JOKERS.nice_day_out

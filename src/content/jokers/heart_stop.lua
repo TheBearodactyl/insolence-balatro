@@ -1,15 +1,16 @@
-BEARO.JOKERS.stopped_heart = SMODS.Joker {
+SMODS.Joker {
     key = "heart_stop",
     config = {
         extra = {
             x_mult_mod = 0.75,
-            reset_chance = 5,
+            reset_chance = 3,
             x_mult = 1
         }
     },
     rarity = 3,
     pos = { x = 0, y = 0 },
     atlas = "jokers",
+    order = 3,
     cost = 10,
     unlocked = true,
     discovered = true,
@@ -67,5 +68,3 @@ BEARO.JOKERS.stopped_heart = SMODS.Joker {
         end
     end,
 }
-
-return BEARO.JOKERS.stopped_heart

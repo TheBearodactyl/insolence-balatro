@@ -1,0 +1,13 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+# Stolen from Cryptid :3
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''local sliced_card = G.jokers.cards[my_pos + 1]'''
+position = "after"
+payload = '''if sliced_card.config.center.rarity == "insolent" then check_for_unlock({type = "fucked_up"}) end'''
+match_indent = true
