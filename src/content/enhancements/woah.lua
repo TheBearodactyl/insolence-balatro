@@ -15,6 +15,15 @@ BEARO.woah = SMODS.Enhancement {
             odds = 3
         }
     },
+    loc_txt = {
+        ["en-us"] = {
+            name = "WOAAAAHH",
+            text = {
+                "it's Wulzy.",
+                "{C:inactive}gives between {C:green}10{} {C:inactive}and{} {C:green}50{} {C:inactive}extra chips{}"
+            }
+        }
+    },
     pos = { x = 0, y = 0 },
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.main_scoring then

@@ -6,7 +6,10 @@ SMODS.Consumable {
         ["en-us"] = {
             name = "Electrified Bathtub",
             text = {
-                ""
+                "Swap the {C:attention}editions{} of {C:green}2{}",
+                "selected cards or {C:attention}Jokers{}",
+                "{C:inactive}Diane: \"we've swapped personalities Frank!\"{}",
+                "{C:inactive}Frank: \"Diane!!! I've got boobies now!!!\"{}",
             }
         }
     },

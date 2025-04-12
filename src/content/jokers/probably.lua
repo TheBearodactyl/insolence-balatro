@@ -13,6 +13,14 @@ SMODS.Joker {
     blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = false,
+    loc_txt = {
+        ["en-us"] = {
+            name = "Lucky 7's",
+            text = {
+                "Luck Incarnate."
+            }
+        }
+    },
     add_to_deck = function(self, card, from_debuff)
         HAS_PROBABLY = true
 

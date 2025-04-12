@@ -10,6 +10,14 @@ SMODS.Joker {
     cost = 50,
     order = 5,
     atlas = "jokers",
+    loc_txt = {
+        ["en-us"] = {
+            name = "{X:red,C:green}first{}{X:green,C:red}there{}{X:red,C:green}was{}{X:green,C:red}a{}{X:red,C:green}void.{}",
+            text = {
+                "{X:red,C:green}then...{} {X:green,C:red}there{}{X:red,C:green}was{}{X:green,C:red}headache.{}"
+            }
+        }
+    },
     calculate = function(self, card, context)
         if G.jokers.cards and context.end_of_round and not context.repetition and not context.individual then
             local leftmost_joker = G.jokers.cards[1]

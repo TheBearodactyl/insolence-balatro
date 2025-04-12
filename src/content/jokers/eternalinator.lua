@@ -9,6 +9,15 @@ SMODS.Joker {
     blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
+    loc_txt = {
+        ["en-us"] = {
+            name = "Eternalinator",
+            text = {
+                "Allows {C:yellow}Eternal{} Jokers",
+                "to appear in the Shop"
+            }
+        }
+    },
     add_to_deck = function(self, card, from_debuff)
         G.GAME.modifiers.enable_eternals_in_shop = true
     end,

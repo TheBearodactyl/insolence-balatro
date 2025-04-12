@@ -20,24 +20,32 @@ SMODS.Sound {
     end
 }
 
-
 SMODS.Joker {
     key = "mugiwara",
-    rarity = "insolent",
+    rarity = "strawhat",
     pos = { x = 3, y = 0 },
     atlas = "jokers",
     cost = 100,
-    config = {},
     unlocked = true,
     discovered = true,
     blueprint_compat = true,
     order = 5,
+    gear1 = nil,
+    gear2 = nil,
+    gear3 = nil,
+    gear4 = nil,
+    gear5 = nil,
     eternal_compat = false,
     perishable_compat = false,
     soul_pos = { x = 11, y = 0 },
-    in_pool = function(self, args)
-        return BEARO.UTILS.insolent_pool_check()
-    end,
+    loc_txt = {
+        ["en-us"] = {
+            name = "{X:gold,C:red}Mugiwara{}",
+            text = {
+                "{X:gold,C:red}laughter.{}"
+            }
+        }
+    },
     add_to_deck = function(self, card, from_debuff)
         if not from_debuff then
             music_countdown = G.TIMERS.UPTIME + 10.3
@@ -54,9 +62,66 @@ SMODS.Joker {
             end
         end
     end,
+    update = function(self, card, dt)
+        if BEARO.UTILS.count_num_of_joker("mugiwara") <= 4 then
+            self.gear1 = true
+            self.gear2 = false
+            self.gear3 = false
+            self.gear4 = false
+            self.gear5 = false
+        elseif BEARO.UTILS.count_num_of_joker("mugiwara") >= 5 and BEARO.UTILS.count_num_of_joker("mugiwara") <= 8 then
+            self.gear1 = true
+            self.gear2 = true
+            self.gear3 = true
+            self.gear4 = false
+            self.gear5 = false
+        elseif BEARO.UTILS.count_num_of_joker("mugiwara") == 9 then
+            self.gear1 = true
+            self.gear2 = true
+            self.gear3 = true
+            self.gear4 = true
+            self.gear5 = false
+        elseif BEARO.UTILS.count_num_of_joker("mugiwara") >= 10 then
+            self.gear1 = true
+            self.gear2 = true
+            self.gear3 = true
+            self.gear4 = true
+            self.gear5 = true
+        end
+    end,
     calculate = function(self, card, context)
         if context.joker_main and not context.repetition and G.GAME and G.jokers then
             local jokers_count = #G.jokers.cards
+
+            if self.gear1 == true and self.gear2 == false and self.gear3 == false and self.gear4 == false and self.gear5 == false then
+                return {
+                    message = localize("k_gumgumbattleaxe_ex"),
+                    mult = 50,
+                    card = card
+                }
+            elseif self.gear1 == true and self.gear2 == true and self.gear3 == true and self.gear4 == false and self.gear5 == false then
+                return {
+                    message = localize("k_gumgumgiantgatling_ex"),
+                    Xmult = 50,
+                    card = card
+                }
+            elseif self.gear1 == true and self.gear2 == true and self.gear3 == true and self.gear4 == true and self.gear5 == false then
+                return {
+                    message = localize("k_gumgumkonggun_ex"),
+                    mult = 500,
+                    Xmult = 500,
+                    emult = 500,
+                    card = card
+                }
+            elseif self.gear1 == true and self.gear2 == true and self.gear3 == true and self.gear4 == true and self.gear5 == true then
+                return {
+                    message = localize("k_gumgumdawnwhip_ex"),
+                    mult = 5000,
+                    Xmult = 5000,
+                    eechip = 5000,
+                    eemult = 5000,
+                }
+            end
         end
     end
 }

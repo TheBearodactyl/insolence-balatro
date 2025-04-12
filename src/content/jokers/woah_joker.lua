@@ -15,13 +15,22 @@ SMODS.Joker {
         y = 0
     },
     atlas = "enhancements",
-    cost = 500,
+    cost = 1,
     unlocked = true,
     discovered = true,
     order = 1,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    loc_txt = {
+        ["en-us"] = {
+            name = "Wulzy",
+            text = {
+                "Plays the {C:red}W{}{C:gold}o{}{C:red}a{}{C:gold}h{} SFX",
+                "evey time you {C:blue}Click{}"
+            }
+        }
+    },
     calculate = function(self, card, context)
         if context.bearo_clicked then
             G.E_MANAGER:add_event(Event {

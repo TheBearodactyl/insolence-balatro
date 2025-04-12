@@ -421,28 +421,18 @@ vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv) {
     }
   }
 
-  return vec4(shadow ? vec3(0., 0., 0.) : tex.xyz,
+  return vec4(shadow ? vec3(0., 0., bocchi.y) : tex.xyz,
               res > adjusted_dissolve ? (shadow ? tex.a * 0.3 : tex.a) : .0);
 }
 
-vec4 effect(vec4 colour, Image texture, vec2 texture_coords,
-            vec2 screen_coords) {
-  float base_zoom = 5;
-  float zoom_factor = bocchi.x > 0.0 ? base_zoom : (1.0 / bocchi.x);
-  float animation_str = bocchi.y > 0.0 ? 0.125 : bocchi.y;
-  vec2 uv = (texture_coords - 0.5) * zoom_factor;
+vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords) {
+  vec4 tex = Texel(texture, texture_coords);
+  vec2 uv = (((texture_coords) * (image_details)) - texture_details.xy * texture_details.ba) / texture_details.ba;
 
-  uv *= 1.0 + (animation_str * sin(time));
+  vec3 col = f(vec2(0.0));
+  vec4 final_color = vec4(col, 0.5);
 
-  vec3 color = f(uv * PI);
-  vec4 tex = vec4(color, 1.0);
-
-  tex.a = 0.75;
-
-  vec2 dissolve_uv = (((texture_coords) * (image_details)) -
-                      texture_details.xy * texture_details.ba) /
-                     texture_details.ba;
-  return dissolve_mask(tex * colour, texture_coords, dissolve_uv);
+  return dissolve_mask(tex * final_color, texture_coords, uv);
 }
 
 extern MY_HIGHP_OR_MEDIUMP vec2 mouse_screen_pos;

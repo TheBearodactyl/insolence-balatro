@@ -4,8 +4,18 @@ SMODS.Consumable {
     pos = { x = 1, y = 0 },
     config = {},
     cost = 3,
+    unlocked = true,
+    discovered = true,
     set = "Spectral",
     order = 13,
+    loc_txt = {
+        ["en-us"] = {
+            name = "Primordial Soup",
+            text = {
+                "Adds {C:attention}Cellulite{} to {C:green}1{} selected {C:attention}playing card{}"
+            }
+        }
+    },
     can_use = function(self, card)
         return (#G.hand.highlighted == 1)
     end,

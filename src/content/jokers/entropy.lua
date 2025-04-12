@@ -16,6 +16,14 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
     soul_pos = { x = 4, y = 0 },
+    loc_txt = {
+        ["en-us"] = {
+            name = "{X:red,C:black}entropy.{}",
+            text = {
+                "{X:red,C:black}void.{}"
+            }
+        }
+    },
     calculate = function(self, card, context)
         if context.end_of_round and context.main_eval and not context.blueprint then
             local curr_x_mult = card.ability.extra.x_mult
@@ -31,7 +39,7 @@ SMODS.Joker {
         if context.joker_main then
             if card.ability.extra.x_mult > 1 then
                 return {
-                    x_mult = card.ability.extra.x_mult,
+                    emult = card.ability.extra.x_mult,
                     card = card
                 }
             end

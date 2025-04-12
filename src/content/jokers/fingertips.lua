@@ -29,6 +29,15 @@ SMODS.Joker {
     eternal_compat = true,
     perishable_compat = true,
     soul_pos = nil,
+    loc_txt = {
+        ["en-us"] = {
+            name = "F I N G E R T I P S",
+            text = {
+                "Increases card",
+                "selection limit by {C:green}#1#{}"
+            }
+        }
+    },
     loc_vars = function(self, info_queue, center)
         return {
             vars = {
@@ -36,7 +45,7 @@ SMODS.Joker {
             }
         }
     end,
-    add_to_deck = function (self, card, from_debuff)
+    add_to_deck = function(self, card, from_debuff)
         card.ability.extra = math.floor(card.ability.extra)
         G.hand.config.highlighted_limit = G.hand.config.highlighted_limit + card.ability.extra
     end,
@@ -50,5 +59,5 @@ SMODS.Joker {
         if not G.GAME.before_play_buffer then
             G.hand:unhighlight_all()
         end
-    end
+    end,
 }

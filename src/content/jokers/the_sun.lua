@@ -17,6 +17,17 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
     soul_pos = { x = 2, y = 0 },
+    loc_txt = {
+        ["en-us"] = {
+            name = "A Nice Day Out",
+            text = {
+                "{C:green}#2#{} in {C:green}#3#{} chance to",
+                "gain {X:red,C:white}X#4#{} mult at the",
+                "end of round",
+                "{C:inactive}(Currently {}{X:red,C:white}X#1#{}{C:inactive} Mult){}"
+            }
+        }
+    },
     loc_vars = function(self, info_queue, card)
         local chance = function()
             if not BEARO.UTILS.is_rigged_cryptid(card) and G.GAME.probabilities.normal then

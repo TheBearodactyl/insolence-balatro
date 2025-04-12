@@ -8,6 +8,14 @@ SMODS.Consumable {
     config = {},
     cost = 20,
     order = 10000000,
+    loc_txt = {
+        ["en-us"] = {
+            name = "The Flower",
+            text = {
+                "Create a Joker of {C:red,X:black}Insolent{} rarity"
+            }
+        }
+    },
     can_use = function(self, card)
         return #G.jokers.cards < G.jokers.config.card_limit
     end,

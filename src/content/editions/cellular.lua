@@ -23,7 +23,12 @@ SMODS.Edition {
     },
     loc_txt = {
         ["en-us"] = {
-            label = "Cellulite!"
+            label = "Cellulite!",
+            text = {
+                "When played as a single card,",
+                "create {C:green}#1#{} copies of self",
+                "{C:inactive}(DNA as an edition){}"
+            }
         }
     },
     loc_vars = function(self, info_queue, card)

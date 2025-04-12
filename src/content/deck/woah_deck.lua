@@ -1,9 +1,19 @@
 SMODS.Back {
     key = "woah_deck",
     atlas = "enhancements",
+    discovered = true,
+    unlocked = true,
     pos = {
         x = 0,
         y = 0,
+    },
+    loc_txt = {
+        ["en-us"] = {
+            name = "Woah Deck",
+            text = {
+                "All cards have the {C:attention}Woah{} enhancement"
+            }
+        }
     },
     apply = function(self, back)
         G.E_MANAGER:add_event(Event {

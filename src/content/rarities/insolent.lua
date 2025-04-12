@@ -9,7 +9,7 @@ SMODS.Rarity {
     badge_colour = G.C.PURPLE,
     get_weight = function(self, weight, object_type)
         if G.GAME.round_resets.ante > 39 then
-            return 0.001
+            return 1
         else
             return 0
         end

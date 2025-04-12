@@ -11,13 +11,25 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     atlas = "jokers",
     order = 3,
-    cost = 10,
+    cost = 5,
     unlocked = true,
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = false,
     soul_pos = nil,
+    loc_txt = {
+        ["en-us"] = {
+            name = "Stopped Heart",
+            text = {
+                "This Joker gains {X:red,C:white}X#1#{} Mult",
+                "at the end of each {C:yellow}round.{}",
+                "{C:green}#2#{} in {C:green}#4#{} chance to {X:red,C:white}NOT{} reset",
+                "upon beating a {C:attention}Boss Blind{}",
+                "{C:inactive}(Currently {}{X:red,C:white}X#3#{}{C:inactive} Mult){}"
+            }
+        }
+    },
     loc_vars = function(self, info_queue, card)
         local chance = function()
             if not BEARO.UTILS.is_rigged_cryptid(card) and G.GAME.probabilities.normal then

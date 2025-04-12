@@ -6,6 +6,15 @@ SMODS.Consumable {
     cost = 3,
     set = "Tarot",
     order = 14,
+    loc_txt = {
+        ["en-us"] = {
+            name = "The Wulz",
+            text = {
+                "Adds the {C:attention}Woah{} enhancement",
+                "to up to {C:green}2{} selected playing cards"
+            }
+        }
+    },
     can_use = function(self, card)
         return (#G.hand.highlighted <= 2 and #G.hand.highlighted > 0)
     end,
