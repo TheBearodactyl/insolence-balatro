@@ -52,9 +52,9 @@ SMODS.load_file("src/content/editions/vaporwave.lua")()
 SMODS.load_file("src/content/editions/voronoi.lua")()
 SMODS.load_file("src/content/editions/aurora.lua")()
 SMODS.load_file("src/content/editions/universe.lua")()
-if not BEARO.MOD.config.photosensitive_mode then
-    SMODS.load_file("src/content/editions/bugged.lua")()
-end
+SMODS.load_file("src/content/editions/pinku.lua")()
+SMODS.load_file("src/content/editions/digitalink.lua")()
+SMODS.load_file("src/content/editions/bugged.lua")()
 
 -- Decks
 SMODS.load_file("src/content/deck/woah_deck.lua")()
@@ -94,11 +94,6 @@ SMODS.current_mod.config_tab = function()
                     padding = 0.05,
                 },
                 nodes = {
-                    create_toggle({
-                        label = "Photosensitive Mode",
-                        ref_table = BEARO.MOD.config,
-                        ref_value = "photosensitive_mode"
-                    }),
                     create_toggle({
                         label = "18+ mode (contains booba)",
                         ref_table = BEARO.MOD.config,

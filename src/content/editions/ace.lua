@@ -33,7 +33,7 @@ SMODS.Edition {
     --- @param card table | Card
     --- @param context table | CalcContext
     calculate = function(self, card, context)
-        if context.cardarea and context.main_scoring then
+        if context.cardarea == G.play and context.main_scoring then
             --- @type boolean
             local has_ace_heart = false
 

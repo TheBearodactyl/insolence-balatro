@@ -42,7 +42,7 @@ function poll_edition(_key, _mod, _no_neg, _guaranteed)
     local edition_poll = pseudorandom(pseudoseed(_key or "edition_generic"))
     local poly_or_neg = pseudorandom("Poly or Neg", 1, 10)
 
-    if HAS_PROBABLY then
+    if HAS_PROBABLY == true then
         if poly_or_neg > 5 then
             return { polychrome = true }
         else

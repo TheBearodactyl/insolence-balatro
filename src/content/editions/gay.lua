@@ -27,10 +27,12 @@ SMODS.Edition {
             }
         }
     end,
+    on_apply = function(self)
+    end,
     calculate = function(self, card, context)
-        local gay_count = 0
-
         if context.cardarea == G.play and context.main_scoring then
+            local gay_count = 0
+
             for _, v in pairs(
             --- @type CalcContext | (Card[] | table[])
                 context.scoring_hand

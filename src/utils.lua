@@ -114,7 +114,6 @@ BEARO.UTILS.placeholder_sprite = function()
     }
 end
 
-
 --- @param mod_cfg Mod
 --- @return table
 BEARO.UTILS.boobs_sprite = function(mod_cfg)
@@ -296,6 +295,8 @@ BEARO.UTILS.random_table_of_strs = function(str_len, tbl_len)
     return strs
 end
 
+--- Generate a random Hex code
+--- @return table
 BEARO.UTILS.rand_hex_code = function()
     local r = math.random(0, 255)
     local g = math.random(0, 255)

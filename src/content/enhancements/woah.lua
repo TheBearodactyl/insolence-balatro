@@ -12,7 +12,6 @@ BEARO.woah = SMODS.Enhancement {
             e_chips_high = 50,
             e_mult_low = 1,
             e_mult_high = 5,
-            odds = 3
         }
     },
     loc_txt = {
@@ -20,7 +19,7 @@ BEARO.woah = SMODS.Enhancement {
             name = "WOAAAAHH",
             text = {
                 "it's Wulzy.",
-                "{C:inactive}gives between {C:green}10{} {C:inactive}and{} {C:green}50{} {C:inactive}extra chips{}"
+                "{C:inactive}(Gives between 10-50 {}{C:chips}chips{}{C:inactive} and 1-5 {}{C:mult}mult{}{C:inactive}){}"
             }
         }
     },

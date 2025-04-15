@@ -23,6 +23,7 @@ SMODS.Edition {
     },
     loc_txt = {
         ["en-us"] = {
+            name = "Cellular",
             label = "Cellulite!",
             text = {
                 "When played as a single card,",

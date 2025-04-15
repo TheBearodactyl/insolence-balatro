@@ -4,7 +4,7 @@
 	#define MY_HIGHP_OR_MEDIUMP mediump
 #endif
 
-extern MY_HIGHP_OR_MEDIUMP vec2 dvd;
+extern MY_HIGHP_OR_MEDIUMP vec2 digitalink;
 extern MY_HIGHP_OR_MEDIUMP number dissolve;
 extern MY_HIGHP_OR_MEDIUMP number time;
 extern MY_HIGHP_OR_MEDIUMP vec4 texture_details;
@@ -12,12 +12,60 @@ extern MY_HIGHP_OR_MEDIUMP vec2 image_details;
 extern bool shadow;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_1;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_2;
-uniform vec3 iResolution;
 
-#define PI 3.14159265359
+#define NUM_LAYERS 11.0
+#define ITER       15
+#define MAX_STEPS  40
+#define MAX_DIST   1000.0
+#define STACK_DENS 100.0
+#define SURF_DIST  0.005
 
-vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv)
-{
+vec4 digitalinktex(vec3 p) {
+    float t  = time + 78.0;
+    vec4 o   = vec4(p.xyz, 3.0 * sin(t * 0.1));
+    vec4 dec = vec4(1.0, 0.9, 0.1, 0.15);
+
+    for (int i = 0; i++ < ITER;) o.xyzw = abs(o / dot(o, o) - dec);
+
+    return o;
+}
+
+float map(vec3 p) {
+    p = abs(p);
+
+    for (int i = 0; i < 6; i++) {
+        p = abs(p) / dot(p, p) - 0.5;
+    }
+
+    float layer = floor(p.x * STACK_DENS);
+    float t     = 0.5 + 0.03 * mod(layer, 3.0);
+
+    return abs(length(p) * t);
+}
+
+float raymarch(vec3 ro, vec3 rd) {
+    float dO = 0.0;
+
+    for (int i = 0; i < MAX_STEPS; i++) {
+        vec3 p = ro + rd * dO;
+        float dS = map(p);
+        if (dS < SURF_DIST) break;
+        dO += dS;
+        if (dO > MAX_DIST) break;
+    }
+
+    return dO;
+}
+
+mat3 lookat(vec3 ro, vec3 ta, float roll) {
+    vec3 ww = normalize(ta - ro);
+    vec3 uu = normalize(cross(vec3(0.0, 1.0, 0.0), ww));
+    vec3 vv = normalize(cross(ww, uu));
+
+    return mat3(uu, vv, ww);
+}
+
+vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv) {
     if (dissolve < 0.001) {
         return vec4(shadow ? vec3(0.,0.,0.) : tex.xyz, shadow ? tex.a*0.3: tex.a);
     }
@@ -54,104 +102,25 @@ vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv)
     return vec4(shadow ? vec3(0.,0.,0.) : tex.xyz, res > adjusted_dissolve ? (shadow ? tex.a*0.3: tex.a) : .0);
 }
 
-float noise(vec2 p) {
-    return sin(p.x * 10.0) * sin(p.y * (3.0 + sin(time / 11.0))) + 0.2;
-}
-
-mat2 rotate(float angle) {
-    return mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
-}
-
-float fbm(vec2 p) {
-    p *= 1.1;
-    float f = 0.;
-    float amp = .5;
-
-    for (int i = 0; i < 3; i++) {
-        mat2 modify = rotate(time / 50. * float(i * i));
-        f += amp * noise(p);
-        p = modify * p;
-        p += 2.;
-        amp /= 2.2;
-    }
-
-    return f;
-}
-
-float pattern(vec2 p, out vec2 q, out vec2 r) {
-    q = vec2(fbm(p + vec2(1.)), fbm(rotate(.1 * time) * p + vec2(1.)));
-    r = vec2(fbm(rotate(.1) * q + vec2(0.)), fbm(q + vec2(0.)));
-
-    return fbm(p + 1. * r);
-}
-
-float digit(vec2 p) {
-    vec2 grid = vec2(3., 1.) * 15;
-    vec2 s = floor(p * grid) / grid;
-    p = p * grid;
-
-    vec2 q;
-    vec2 r;
-
-    float intensity = pattern(s / 10., q, r) * 1.3 - 0.03;
-    p = fract(p);
-    p *= vec2(1.2, 1.2);
-
-    float x = fract(p.x * 5.);
-    float y = fract((1. - p.y) * 5.);
-    int i = int(floor((1. - p.y) * 5.));
-    int j = int(floor(p.x * 5.));
-    int n = (i - 2) * (i - 2) + (j - 2) * (j - 2);
-
-    float f = float(n) / 16.;
-    float is_on = intensity - f > 0.1 ? 1. : 0.;
-
-    return p.x <= 1. && p.y <= 1. ? is_on * (0.2 + y * 4. / 5.) * (0.75 + x / 4.) : 0.;
-}
-
-float hash(float x) {
-    return fract(sin(x * 234.1) * 324.19 + sin(sin(x * 3214.09) * 34.132 * x) + x * 234.12);
-}
-
-float on_off(float a, float b, float c) {
-    return step(c, sin(time + a * cos(time * b)));
-}
-
-float displace(vec2 look) {
-    float y = (look.y - mod(time / 4., 1.));
-    float win = 1. / (1. + 50. * y * y);
-
-    return (sin(look.y * 20. + time) / 80. * on_off(4., 2., .8) * (1. + cos(time * 60.)) * win);
-}
-
-vec3 get_color(vec2 p) {
-    float bar = mod(p.y + time * 20., 1.) < 0.2 ? 1.4 : 1.;
-    p.x += displace(p);
-    float middle = digit(p);
-    float off = 0.002;
-    float sum = 0.;
-
-    for (float i = -1.; i < 2.; i += 1.) {
-        for (float j = -1.; j < 2.; j += 1.) {
-            sum += digit(p + vec2(off * i, off * j));
-        }
-    }
-
-    return vec3(0.9) * middle + sum / 10. * vec3(0., 1., 0.) * bar;
-}
-
 vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords) {
     vec4 tex = Texel(texture, texture_coords);
     vec2 uv = (((texture_coords) * (image_details)) - texture_details.xy * texture_details.ba) / texture_details.ba;
 
-    float time_fast = time / 3. + clamp(dvd.x, 0.001, 0.002);
-    vec2 p = texture_coords / uv.xy;
-    float off = 0.0001;
-    vec3 col = get_color(p);
+    vec3 ro = vec3(2.0 * sin(time * 0.3), 2.0, 4.0 * cos(time * 0.3));
+    vec3 ta = vec3(0.0, 0.0, 0.0);
+    vec3 rd = lookat(ro, ta, 0.0) * normalize(vec3(uv, 1.0));
 
-    vec4 final_colour = vec4(col, clamp(dvd.x, 1.0, 1.0));
-
-    return dissolve_mask(tex * final_colour, texture_coords, uv);
+    float dist = raymarch(ro, rd);
+    vec3 p = vec3(1.0, 1.0, 1.0) * dist;
+    vec3 q = ro + dist * rd;
+    float ao = exp(-0.1 * dist) * 3.0 - clamp(digitalink.x, 0.00001, 0.00001);
+    vec3 final_color = vec3(0.0);
+    if (dist < MAX_DIST) {
+        vec3 tex_col = digitalinktex(q).rgb;
+        final_color = mix(clamp(tex_col, 0.0, 0.9), tex_col, p.x);
+    }
+    final_color *= ao;
+    return dissolve_mask(tex * vec4(final_color, 0.75), texture_coords, uv);
 }
 
 extern MY_HIGHP_OR_MEDIUMP vec2 mouse_screen_pos;

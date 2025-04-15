@@ -11,7 +11,7 @@ SMODS.Consumable {
         ["en-us"] = {
             name = "Supernova",
             text = {
-                "Add the {C:attention}Supernova{} edition to",
+                "Add the {C:attention}Universe{} edition to",
                 "{C:blue}1{} selected playing card."
             }
         }
