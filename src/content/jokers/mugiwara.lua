@@ -38,6 +38,11 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
     soul_pos = { x = 11, y = 0 },
+    config = {
+        extra = {
+            gear = 1
+        }
+    },
     loc_txt = {
         ["en-us"] = {
             name = "{X:gold,C:red}Mugiwara{}",
@@ -64,24 +69,32 @@ SMODS.Joker {
     end,
     update = function(self, card, dt)
         if BEARO.UTILS.count_num_of_joker("mugiwara") <= 4 then
+            card.ability.extra.gear = 2
+
             self.gear1 = true
             self.gear2 = false
             self.gear3 = false
             self.gear4 = false
             self.gear5 = false
         elseif BEARO.UTILS.count_num_of_joker("mugiwara") >= 5 and BEARO.UTILS.count_num_of_joker("mugiwara") <= 8 then
+            card.ability.extra.gear = 3
+
             self.gear1 = true
             self.gear2 = true
             self.gear3 = true
             self.gear4 = false
             self.gear5 = false
         elseif BEARO.UTILS.count_num_of_joker("mugiwara") == 9 then
+            card.ability.extra.gear = 4
+
             self.gear1 = true
             self.gear2 = true
             self.gear3 = true
             self.gear4 = true
             self.gear5 = false
         elseif BEARO.UTILS.count_num_of_joker("mugiwara") >= 10 then
+            card.ability.extra.gear = 5
+
             self.gear1 = true
             self.gear2 = true
             self.gear3 = true

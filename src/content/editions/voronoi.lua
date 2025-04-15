@@ -12,6 +12,7 @@ SMODS.Edition {
             label = "Ever Changing",
             text = {
                 "Gives {C:red}+#1#{} mult",
+                "{C:inactive}(Gives the number of {C:attention}Cards{}{C:inactive} in {C:attention}Deck{}{C:inactive} divided by {C:green}PI{}{C:inactive}){}"
             }
         }
     },
@@ -19,13 +20,13 @@ SMODS.Edition {
         if G.deck then
             return {
                 vars = {
-                    math.floor(#G.deck.cards / 2)
+                    #G.deck.cards / 3.14159265359
                 }
             }
         else
             return {
                 vars = {
-                    0
+                    52 / 3.14159265359
                 }
             }
         end
@@ -33,9 +34,9 @@ SMODS.Edition {
     calculate = function(self, card, context)
         if context.cardarea == G.play and G.deck and context.main_scoring and not context.repetition then
             return {
-                message = "fractal",
+                message = "E v e r C h a n g i n g",
                 card = card,
-                mult_mod = math.floor(#G.deck.cards / 2)
+                mult_mod = #G.deck.cards / 3.14159265359
             }
         end
     end

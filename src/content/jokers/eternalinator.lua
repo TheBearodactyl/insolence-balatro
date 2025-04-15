@@ -1,9 +1,12 @@
 SMODS.Joker {
     key = "eternalinator",
     atlas = "jokers",
-    pos = BEARO.UTILS.placeholder_sprite(),
+    pos = {
+        x = 16,
+        y = 0,
+    },
     cost = 7,
-    rarity = 4,
+    rarity = 2,
     unlocked = true,
     discovered = false,
     blueprint_compat = false,

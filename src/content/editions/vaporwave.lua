@@ -6,9 +6,9 @@ SMODS.Shader {
 SMODS.Edition {
     key = "vaporwave_ed",
     shader = "vaporwave",
-    disable_base_shader = true,
+    disable_base_shader = false,
     config = {
-        extra = 1.2,
+        extra = 1.3,
     },
     loc_txt = {
         ["en-us"] = {

@@ -5,6 +5,26 @@ local utf8 = require("utf8")
 BEARO.UTILS = {}
 BEARO.UTILS.H = {}
 
+--- @alias include_type
+--- | "achievements" # An Achievement
+--- | "consumables"  # A Consumable
+--- | "deck"         # A Deck
+--- | "editions"     # An Edition
+--- | "enhancements" # An Enhancement
+--- | "jokers"       # A Joker
+--- | "rarities"     # A Rarity
+--- | "tweaks"       # A Tweak
+
+--- @param name string
+--- @param type include_type
+BEARO.UTILS.include_content = function(name, type)
+    SMODS.load_file("src/content/" .. type .. "/" .. name .. ".lua")()
+end
+
+BEARO.UTILS.include = function(path)
+    SMODS.load_file(path)()
+end
+
 --- @param t table Table to reverse
 --- @return table # Reverses the order of keys in a table
 BEARO.UTILS.reverse_table = function(t)
@@ -58,6 +78,21 @@ BEARO.UTILS.create_gradient = function(key, colors)
     }
 end
 
+--- @param word string
+--- @return string
+BEARO.UTILS.capitalize = function(word)
+    if not word or word == "" then
+        return word
+    end
+
+    return word:sub(1, 1):upper() .. word:sub(2):lower()
+end
+
+--- @param context CalcContext
+BEARO.UTILS.playing_card_context = function (context)
+    return (context.cardarea == G.play and context.main_scoring)
+end
+
 --- Applies a modifer to all number values in a table
 --- @param input table | number
 --- @param modifier number
@@ -76,6 +111,21 @@ BEARO.UTILS.mod_vals = function(input, modifier)
     else
         return input
     end
+end
+
+--- Gets whether or not you have all of the jokers specified with the jokers parameter
+--- @param joker_keys table<string>
+--- @return boolean
+BEARO.UTILS.has_joker_combo = function(joker_keys)
+    local has_jokers = true
+
+    for _, v in joker_keys do
+        if not SMODS.find_card(v, false) then
+            has_jokers = false
+        end
+    end
+
+    return has_jokers
 end
 
 --- Exponentiate `base` to the power of `power`
@@ -118,11 +168,30 @@ end
 --- @return table
 BEARO.UTILS.boobs_sprite = function(mod_cfg)
     if mod_cfg.config.adult_mode then
-        return { x = 12, y = 0 }
+        return { x = 1000, y = 10000 }
     elseif not mod_cfg.config.adult_mode then
-        return BEARO.UTILS.placeholder_sprite()
+        return { x = 12, y = 2 }
     else
-        return BEARO.UTILS.placeholder_sprite()
+        return { x = 1000, y = 10000 }
+    end
+end
+
+BEARO.UTILS.anim_spr = function(dt, speed, width, height, last_frame, center)
+    if dt > 0.1 then
+        dt = 0
+
+        --- @type SMODS.Center
+        local obj = center
+
+        if obj.pos.x == width and obj.pos.y == height then
+            obj.pos.x = 0
+            obj.pos.y = 0
+        elseif obj.pos.x < last_frame.x then
+            obj.pos.x = obj.pos.x + 1
+        elseif obj.pos.y < last_frame.y then
+            obj.pos.x = 0
+            obj.pos.y = obj.pos.y + 1
+        end
     end
 end
 
@@ -385,6 +454,30 @@ end
 BEARO.UTILS.dec = function(num)
     return num - 1
 end
+
+--- @param messages table<table<string, table>> # A table of messages to cycle through along with their respective colors
+--- @param random boolean # Whether the cycling should be randomized or follow the order of the messages table
+--- @param cycle_delay number # Time between cycled messages
+--- @param text_scale number # The scale for the displayed text
+--- @return table # The new DynaText object
+BEARO.UTILS.cycling_text = function(messages, random, cycle_delay, text_scale)
+    return {
+        n = G.UIT.O,
+        config = {
+            object = DynaText({
+                string = messages,
+                colours = { G.C.BLUE },
+                pop_in_rate = 99999999,
+                silent = true,
+                random_element = random,
+                pop_delay = cycle_delay,
+                min_cycle_time = 0,
+                scale = text_scale
+            })
+        }
+    }
+end
+
 
 --- @alias PatternFunc fun(value: any): boolean
 --- @alias Pattern any | PatternFunc

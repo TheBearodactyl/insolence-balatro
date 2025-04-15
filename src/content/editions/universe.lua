@@ -35,7 +35,7 @@ SMODS.Edition {
                 "ante by {C:red}#1#{}. {C:red}Self destructs{}",
                 " ",
                 "Only {C:green}1{} may exist at a time.",
-                "{C:inactive}(A small fragment of the universe...){}"
+                "{C:inactive,s:0.6}(A small fragment of the universe...){}"
             }
         }
     },

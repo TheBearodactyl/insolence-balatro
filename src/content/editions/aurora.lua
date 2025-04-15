@@ -7,7 +7,7 @@ SMODS.Edition {
     key = "aurora_ed",
     shader = "aurora",
     config = {
-        extra = 1.02
+        extra = 1.05
     },
     loc_txt = {
         ["en-us"] = {
@@ -27,6 +27,12 @@ SMODS.Edition {
     end,
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.main_scoring then
+            return {
+                eemult = self.config.extra
+            }
+        end
+
+        if context.cardarea == G.jokers and context.joker_main then
             return {
                 eemult = self.config.extra
             }

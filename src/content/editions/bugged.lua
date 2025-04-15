@@ -16,9 +16,6 @@ SMODS.Edition {
     },
     badge_colour = bugged_gradient,
     loc_vars = function(self, info_queue, card)
-        -- math.randomseed(math.sin(math.pi * os.time()), math.cos(math.pi / os.time()))
-
-        -- giant ass table lmao
         BEARO.bugged_msgs = {
             { string = BEARO.UTILS.random_str(BEARO.UTILS.rand_int(10, 15)), colour = G.C.RED },
             { string = BEARO.UTILS.random_str(BEARO.UTILS.rand_int(10, 15)), colour = G.C.RED },
@@ -66,7 +63,7 @@ SMODS.Edition {
     loc_txt = {
         ["en-us"] = {
             name = "Bugged",
-            label = BEARO.UTILS.random_str(5),
+            label = BEARO.UTILS.random_str(12),
             text = { "" }
         }
     },

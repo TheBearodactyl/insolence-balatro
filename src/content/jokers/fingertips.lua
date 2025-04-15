@@ -34,14 +34,16 @@ SMODS.Joker {
             name = "F I N G E R T I P S",
             text = {
                 "Increases card",
-                "selection limit by {C:green}#1#{}"
+                "selection limit by {C:green}#1#{}",
+                "{C:inactive}(Current limit: #2#){}"
             }
         }
     },
     loc_vars = function(self, info_queue, center)
         return {
             vars = {
-                center.ability.extra
+                center.ability.extra,
+                G.hand and G.hand.config.highlighted_limit or 5
             }
         }
     end,

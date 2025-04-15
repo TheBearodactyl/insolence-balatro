@@ -27,7 +27,8 @@ end
 SMODS.Joker {
     key = "boobs",
     atlas = "jokers",
-    pos = BEARO.UTILS.boobs_sprite(BEARO.MOD),
+    pos = { x = 12, y = 0 },
+    soul_pos = BEARO.UTILS.boobs_sprite(BEARO.MOD),
     order = 70,
     config = {
         extra = {
@@ -61,14 +62,14 @@ SMODS.Joker {
             return {
                 vars = {
                     msg,
-                    self.config.extra.chips
+                    card.ability.extra.chips
                 }
             }
         else
             return {
                 vars = {
                     "A BOOB! WOW!",
-                    self.config.extra.chips
+                    card.ability.extra.chips
                 }
             }
         end
@@ -85,16 +86,16 @@ SMODS.Joker {
         end
 
         if boobs_count <= 1 then
-            self.config.extra.chips = 80
+            card.ability.extra.chips = 80
         elseif boobs_count >= 2 then
-            self.config.extra.chips = 8008
+            card.ability.extra.chips = 8008
         end
     end,
     calculate = function(self, card, context)
         if context.joker_main then
             return {
                 message = "(. Y .)",
-                chips = self.config.extra.chips,
+                chips = card.ability.extra.chips,
                 card = card
             }
         end
