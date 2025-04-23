@@ -68,7 +68,7 @@ SMODS.Joker {
         end
     end,
     update = function(self, card, dt)
-        if BEARO.UTILS.count_num_of_joker("mugiwara") <= 4 then
+        if BEARO.UTILS.count_num_of_joker_bearo("mugiwara") <= 4 then
             card.ability.extra.gear = 2
 
             self.gear1 = true
@@ -76,7 +76,7 @@ SMODS.Joker {
             self.gear3 = false
             self.gear4 = false
             self.gear5 = false
-        elseif BEARO.UTILS.count_num_of_joker("mugiwara") >= 5 and BEARO.UTILS.count_num_of_joker("mugiwara") <= 8 then
+        elseif BEARO.UTILS.count_num_of_joker_bearo("mugiwara") >= 5 and BEARO.UTILS.count_num_of_joker_bearo("mugiwara") <= 8 then
             card.ability.extra.gear = 3
 
             self.gear1 = true
@@ -84,7 +84,7 @@ SMODS.Joker {
             self.gear3 = true
             self.gear4 = false
             self.gear5 = false
-        elseif BEARO.UTILS.count_num_of_joker("mugiwara") == 9 then
+        elseif BEARO.UTILS.count_num_of_joker_bearo("mugiwara") == 9 then
             card.ability.extra.gear = 4
 
             self.gear1 = true
@@ -92,7 +92,7 @@ SMODS.Joker {
             self.gear3 = true
             self.gear4 = true
             self.gear5 = false
-        elseif BEARO.UTILS.count_num_of_joker("mugiwara") >= 10 then
+        elseif BEARO.UTILS.count_num_of_joker_bearo("mugiwara") >= 10 then
             card.ability.extra.gear = 5
 
             self.gear1 = true

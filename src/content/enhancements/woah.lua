@@ -19,10 +19,18 @@ BEARO.woah = SMODS.Enhancement {
             name = "WOAAAAHH",
             text = {
                 "it's Wulzy.",
-                "{C:inactive}(Gives between 10-50 {}{C:chips}chips{}{C:inactive} and 1-5 {}{C:mult}mult{}{C:inactive}){}"
+                "{C:inactive}(Gives between #1#-50 {}{C:chips}chips{}{C:inactive} and #2#-5 {}{C:mult}mult{}{C:inactive}){}"
             }
         }
     },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+                self.config.extra.e_chips_low,
+                self.config.extra.e_mult_low
+            }
+        }
+    end,
     pos = { x = 0, y = 0 },
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.main_scoring then
@@ -54,4 +62,13 @@ BEARO.woah = SMODS.Enhancement {
             }
         end
     end,
+    update = function(self, card, dt)
+        if BEARO.UTILS.count_num_of_joker_bearo("wulzy") >= 1 then
+            self.config.extra.e_chips_low = 50
+            self.config.extra.e_mult_low = 5
+        else
+            self.config.extra.e_chips_low = 10
+            self.config.extra.e_mult_low = 1
+        end
+    end
 }

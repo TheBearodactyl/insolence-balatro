@@ -39,6 +39,7 @@ incl("brook", "jokers")         -- Straw Hat
 
 -- Enhancements
 incl("woah", "enhancements")
+incl("legendary", "enhancements")
 
 -- Consumables
 incl("electrified_bath", "consumables")
@@ -66,6 +67,7 @@ incl("bugged", "editions")
 
 -- Decks
 incl("woah_deck", "deck")
+incl("legendary_deck", "deck")
 incl("edition_decks", "deck")
 
 -- Tweaks
@@ -73,6 +75,7 @@ BEARO.UTILS.include("src/modifier_badges.lua")
 incl("big_hand_formatting", "tweaks")
 incl("more_mod_badges", "tweaks")
 incl("custom_game_update", "tweaks")
+incl("more_contexts", "tweaks")
 
 -- Achievements
 incl("boob_achievements", "achievements")
@@ -114,9 +117,9 @@ SMODS.current_mod.config_tab = function()
 						ref_value = "adult_mode",
 					}),
 					create_toggle({
-						label = "Enable Big Jokers (WARNING: extreme loading times!)",
+						label = "Enable Woah SFX",
 						ref_table = BEARO.MOD.config,
-						ref_value = "big_files"
+						ref_value = "woah_sfx"
 					}),
 					create_option_cycle({
 						label = "Mugiwara Music",

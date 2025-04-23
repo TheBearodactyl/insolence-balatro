@@ -55,8 +55,8 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
-    key = "strawhatbg",
-    px = 69,
-    py = 93,
+    key = "legendary",
+    px = 69 / 2,
+    py = 93 / 2,
     path = "strawhat.png"
 }

@@ -1,12 +1,3 @@
-local lcpref = Controller.L_cursor_press
---- @diagnostic disable-next-line: duplicate-set-field
-function Controller:L_cursor_press(x, y)
-    lcpref(self, x, y)
-    if G and G.jokers and G.jokers.cards and not G.SETTINGS.paused then
-        SMODS.calculate_context({ bearo_clicked = true })
-    end
-end
-
 SMODS.Joker {
     key = "wulzy",
     rarity = 1,
@@ -27,21 +18,16 @@ SMODS.Joker {
             name = "Wulzy",
             text = {
                 "Plays the {C:red}W{}{C:gold}o{}{C:red}a{}{C:gold}h{} SFX",
-                "evey time you {C:blue}Click{}"
+                "evey time you {C:blue}Click{}",
+                " ",
+                "{C:inactive}(Causes Woah cards to give 50 chips and 5 mult){}"
             }
         }
     },
     calculate = function(self, card, context)
-        if context.bearo_clicked then
-            G.E_MANAGER:add_event(Event {
-                trigger = "after",
-                delay = 0.8,
-                func = function()
-                    play_sound("bearo_woah")
-                    card:juice_up(0.8, 0.5)
-                    return true
-                end
-            })
+        if context.bearo_clicked_left and BEARO.MOD.config.woah_sfx == true then
+            play_sound("bearo_woah")
+            card:juice_up(0.8, 0.5)
         end
-    end
+    end,
 }

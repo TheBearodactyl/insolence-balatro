@@ -305,9 +305,26 @@ BEARO.UTILS.insolent_pool_check = function()
     end
 end
 
+--- @param prefix string
 --- @param joker_key string
 --- @return number
-BEARO.UTILS.count_num_of_joker = function(joker_key)
+BEARO.UTILS.count_num_of_joker = function(prefix, joker_key)
+    local joker_count = 0
+
+    if G.jokers then
+        for _, v in pairs(G.jokers.cards) do
+            if v.ability.name == "j_" .. prefix .. "_" .. joker_key then
+                joker_count = joker_count + 1
+            end
+        end
+    end
+
+    return joker_count
+end
+
+--- @param joker_key string
+--- @return number
+BEARO.UTILS.count_num_of_joker_bearo = function(joker_key)
     local joker_count = 0
 
     if G.jokers then
@@ -478,6 +495,26 @@ BEARO.UTILS.cycling_text = function(messages, random, cycle_delay, text_scale)
     }
 end
 
+--- @param num number
+--- @param min number
+--- @param max number
+--- @return number
+BEARO.UTILS.clamp = function(num, min, max)
+    if num < min then
+        return min
+    elseif num > max then
+        return max
+    else
+        return num
+    end
+end
+
+--- @param chance number The percent chance to return true
+--- @return boolean
+BEARO.UTILS.chance = function(chance)
+    local rand_num = math.random()
+    return rand_num <= chance
+end
 
 --- @alias PatternFunc fun(value: any): boolean
 --- @alias Pattern any | PatternFunc

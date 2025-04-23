@@ -1,3 +1,5 @@
+---@diagnostic disable: duplicate-set-field
+
 -- copied from cryptid lmao
 local pokerhandinforef = G.FUNCS.get_poker_hand_info
 function G.FUNCS.get_poker_hand_info(_cards)
