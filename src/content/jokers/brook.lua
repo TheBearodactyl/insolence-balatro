@@ -26,5 +26,8 @@ SMODS.Joker {
                 colour = G.C.RED
             }
         end
+    end,
+    update = function (self, card, dt)
+        local jokers = G.jokers.cards or {}
     end
 }

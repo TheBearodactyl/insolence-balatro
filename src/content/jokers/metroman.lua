@@ -13,8 +13,16 @@ SMODS.Joker {
         ["en-us"] = {
             name = "{X:gold,C:white}M{X:white,C:gold}e{X:gold,C:white}t{X:white,C:gold}r{X:gold,C:white}o{X:white,C:gold}m{X:gold,C:white}a{X:white,C:gold}n{}",
             text = {
-                "{X:gold,C:white}speed.{}"
+                "{X:gold,C:white}speed.{}",
+                "{C:inactive}(Automatically sorts your jokers for you){}"
             }
         }
     },
+    calculate = function(self, card, context)
+    end,
+    update = function (self, card, dt)
+        local jokers = G.jokers.cards or {}
+
+        
+    end
 }

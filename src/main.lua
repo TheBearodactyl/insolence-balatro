@@ -80,7 +80,7 @@ incl("more_contexts", "tweaks")
 -- Achievements
 incl("boob_achievements", "achievements")
 
-if SMODS.Mods["JokerDisplay"].can_load then
+if SMODS.Mods["JokerDisplay"] and SMODS.Mods["JokerDisplay"].can_load then
 	BEARO.UTILS.include("src/joker_disp.lua")
 end
 
