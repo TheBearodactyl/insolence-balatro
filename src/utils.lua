@@ -14,6 +14,7 @@ BEARO.UTILS.H = {}
 --- | "jokers"       # A Joker
 --- | "rarities"     # A Rarity
 --- | "tweaks"       # A Tweak
+--- | "stakes"       # A Stake
 
 --- @param name string
 --- @param type include_type
@@ -21,8 +22,26 @@ BEARO.UTILS.include_content = function(name, type)
     SMODS.load_file("src/content/" .. type .. "/" .. name .. ".lua")()
 end
 
+--- @param path string
 BEARO.UTILS.include = function(path)
     SMODS.load_file(path)()
+end
+
+--- @param tbl table
+BEARO.UTILS.largest_val = function(tbl)
+    if not tbl or next(tbl) == nil then
+        return nil
+    end
+
+    local mk, mv = next(tbl)
+
+    for k, v in pairs(tbl) do
+        if type(v) == "number" and v > mv then
+            mk, mv = k, v
+        end
+    end
+
+    return mk
 end
 
 --- @param t table Table to reverse
@@ -89,7 +108,7 @@ BEARO.UTILS.capitalize = function(word)
 end
 
 --- @param context CalcContext
-BEARO.UTILS.playing_card_context = function (context)
+BEARO.UTILS.playing_card_context = function(context)
     return (context.cardarea == G.play and context.main_scoring)
 end
 
@@ -126,6 +145,62 @@ BEARO.UTILS.has_joker_combo = function(joker_keys)
     end
 
     return has_jokers
+end
+
+-- Stolen from cryptid
+--- @param name string
+--- @param rarity string | table | nil
+---@param ability string | table | nil
+---@param edition SMODS.Edition
+---@param non_debuff true
+---@param area CardArea
+BEARO.UTILS.find_joker_next = function(name, rarity, edition, ability, non_debuff, area)
+    local jokers = {}
+    local filter = 0
+    if not G.jokers or not G.jokers.cards then return {} end
+    if name then filter = filter + 1 end
+    if edition then filter = filter + 1 end
+    if type(rarity) ~= "table" then if type(rarity) == "string" then rarity = { rarity } else rarity = nil end end
+    if rarity then filter = filter + 1 end
+    if type(ability) ~= "table" then if type(ability) == "string" then ability = { ability } else ability = nil end end
+    if ability then filter = filter + 1 end
+    if filter == 0 then return {} end
+
+    if not area or area == "j" then
+        for k, v in pairs(G.jokers.cards) do
+            if v and type(v) == "table" and (non_debuff or not v.debuff) then
+                local check = 0
+                if name and v.ability.name then check = check + 1 end
+                if edition and (v.edition and v.edition.key == edition) then check = check + 1 end
+
+                if rarity then
+                    for _, a in ipairs(rarity) do
+                        if v.config.center.rarity == a then
+                            check = check + 1
+                            break
+                        end
+                    end
+                end
+
+                if ability then
+                    local abil_check = true
+
+                    for _, b in ipairs(ability) do
+                        if not v.ability[b] then
+                            abil_check = false
+                            break
+                        end
+                    end
+
+                    if abil_check then check = check + 1 end
+                end
+
+                if check == filter then
+                    table.insert(jokers, v)
+                end
+            end
+        end
+    end
 end
 
 --- Exponentiate `base` to the power of `power`
@@ -176,11 +251,16 @@ BEARO.UTILS.boobs_sprite = function(mod_cfg)
     end
 end
 
+--- @param dt number
+--- @param speed number
+--- @param width number
+--- @param height number
+--- @param last_frame { x: number, y: number }
+--- @param center SMODS.Center
 BEARO.UTILS.anim_spr = function(dt, speed, width, height, last_frame, center)
     if dt > 0.1 then
         dt = 0
 
-        --- @type SMODS.Center
         local obj = center
 
         if obj.pos.x == width and obj.pos.y == height then
@@ -192,6 +272,21 @@ BEARO.UTILS.anim_spr = function(dt, speed, width, height, last_frame, center)
             obj.pos.x = 0
             obj.pos.y = obj.pos.y + 1
         end
+    end
+end
+
+--- @param x number
+--- @param y number
+--- @param threshold number
+BEARO.UTILS.within = function(x, y, threshold)
+    return math.abs(x - y) <= x
+end
+
+BEARO.UTILS.mod_cond = function(mod_id, if_exists, otherwise)
+    if (SMODS.Mods[mod_id] or {}).can_load then
+        return if_exists
+    else
+        return otherwise
     end
 end
 
@@ -229,9 +324,14 @@ BEARO.UTILS.every_day_im_shufflin = function(tbl)
         return tbl
     end
 
+    --- @type table
     local values = {}
+
+    --- @type table
     local paths = {}
 
+    --- @param current table
+    --- @param path string
     local function collect_values(current, path)
         for k, v in pairs(current) do
             local new_path = path .. '.' .. k
@@ -251,7 +351,11 @@ BEARO.UTILS.every_day_im_shufflin = function(tbl)
         values[i], values[j] = values[j], values[i]
     end
 
+    --- @type integer
     local value_index = 1
+
+    --- @param current table
+    --- @param path string
     local function reconstruct(current, path)
         for k, v in pairs(current) do
             local new_path = path .. '.' .. k
@@ -408,7 +512,9 @@ BEARO.UTILS.rand_table_of_hex_codes = function(colors)
     return rand_colors
 end
 
+--- @generic T
 --- @param tbl table
+--- @return T
 BEARO.UTILS.choose_rand = function(tbl)
     if type(tbl) ~= "table" then
         error("Argument must be a table")

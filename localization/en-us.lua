@@ -45,9 +45,21 @@ return {
                 "Disabled"
             },
 
+            bearo_laskey_music_options = {
+                "Always enabled",
+                "While owned",
+                "Shortly on bought",
+                "Disabled"
+            },
+
             bearo_music_description = {
                 "When to play Mugiwara music",
                 "(rights owned by Toei Animation)"
+            },
+
+            bearo_laskey_music_description = {
+                "When to play Sam Laskey music",
+                "(rights owned by Sam Laskey)"
             }
         },
     }

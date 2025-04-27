@@ -3,72 +3,62 @@ SMODS.Shader {
     path = "digitalink.fs"
 }
 
+local printer_msgs = {
+    { string = "When playing 3 or more cards,", G.C.BLACK },
+    { string = "convert all Printer Ink cards", G.C.BLACK },
+    { string = "into the most used suit in",    G.C.BLACK },
+    { string = "played hand.",                  G.C.BLACK },
+}
+
 SMODS.Edition {
     key = "digitalink_ed",
     shader = "digitalink",
     loc_txt = {
         ["en-us"] = {
-            name = "Digital Ink",
+            name = "Printer Ink",
             label = "Grainy and Smeared",
-            text = {
-                "When scored, change suit at random.",
-            }
+            text = { "" }
         }
     },
-    calculate = function(self, card, context)
-        local suits = {
-            "Hearts",
-            "Diamonds",
-            "Spades",
-            "Clubs"
+    loc_vars = function(self, info_queue, card)
+        return {
+            main_start = {
+                BEARO.UTILS.cycling_text(printer_msgs, false, 1, 0.5)
+            }
         }
+    end,
+    calculate = function(self, card, context)
+        if context.full_hand and #context.full_hand >= 3 then
+            local suits = {
+                clubs = 0,
+                spades = 0,
+                hearts = 0,
+                diamonds = 0,
+            }
 
-        if context.cardarea == G.play and context.main_scoring and not context.repetition then
-            G.E_MANAGER:add_event(Event {
-                trigger = "after",
-                delay = 0.4,
-                func = function()
-                    play_sound("tarot1")
-                    card:juice_up(0.3, 0.5)
-
-                    return true
+            for k, v in pairs(context.full_hand) do
+                if v:is_suit("Clubs") then
+                    suits.clubs = suits.clubs + 1
+                elseif v:is_suit("Hearts") then
+                    suits.hearts = suits.hearts + 1
+                elseif v:is_suit("Spades") then
+                    suits.spades = suits.spades + 1
+                elseif v:is_suit("Diamonds") then
+                    suits.diamonds = suits.diamonds + 1
                 end
+            end
+
+            local majority_suit = BEARO.UTILS.largest_val(suits)
+
+            --- @type string
+            local new_suit = BEARO.UTILS.match(majority_suit, {
+                ["clubs"] = "Clubs",
+                ["spades"] = "Spades",
+                ["hearts"] = "Hearts",
+                ["diamonds"] = "Diamonds"
             })
 
-            local percent = 1.15 - (1 - 0.999) / (1 - 0.998) * 0.3
-
-            G.E_MANAGER:add_event(Event {
-                trigger = "after",
-                delay = 0.15,
-                func = function()
-                    card:flip()
-                    play_sound("card1", percent)
-                    card:juice_up(0.3, 0.3)
-
-                    return true
-                end
-            })
-
-            delay(0.2)
-
-            local percent = 0.85 + (1 - 0.999) / (1 - 0.998) * 0.3
-
-            G.E_MANAGER:add_event(Event {
-                trigger = "after",
-                delay = 0.15,
-                func = function()
-                    card:flip()
-                    card:change_suit(BEARO.UTILS.choose_rand(suits))
-
-                    play_sound("card1", percent)
-
-                    card:juice_up(0.3, 0.3)
-
-                    return true
-                end
-            })
-
-            delay(0.2)
+            card:change_suit(new_suit)
         end
-    end
+    end,
 }
