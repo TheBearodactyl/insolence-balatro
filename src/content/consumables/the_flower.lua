@@ -3,7 +3,7 @@ SMODS.Consumable {
     atlas = "consumables",
     pos = { x = 3, y = 0 },
     soul_pos = { x = 4, y = 0 },
-    hidden = true,
+    hidden = false,
     set = "Spectral",
     config = {},
     cost = 20,

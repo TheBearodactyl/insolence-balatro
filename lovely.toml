@@ -24,3 +24,166 @@ payload = "{card_limit = self.GAME.starting_params.joker_slots, type = 'joker', 
 match_indent = true
 
 # ------------------- Electrified Bathtub End --------------- #
+
+# ---------------------- Time to Stop ----------------------- #
+
+# Thank you, NotJustYet
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+function Game:update_hand_played(dt)
+    if self.buttons then self.buttons:remove(); self.buttons = nil end
+    if self.shop then self.shop:remove(); self.shop = nil end
+
+    if not G.STATE_COMPLETE then
+        G.STATE_COMPLETE = true
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            func = function()
+        if G.GAME.chips - G.GAME.blind.chips >= 0 or G.GAME.current_round.hands_left < 1 then
+            G.STATE = G.STATES.NEW_ROUND
+        else
+            G.STATE = G.STATES.DRAW_TO_HAND
+        end
+        G.STATE_COMPLETE = false
+        return true
+        end
+        }))
+    end
+end
+'''
+position = "at"
+payload = '''
+function Game:update_hand_played(dt)
+    if self.buttons then self.buttons:remove(); self.buttons = nil end
+    if self.shop then self.shop:remove(); self.shop = nil end
+
+    if not G.STATE_COMPLETE then
+        G.STATE_COMPLETE = true
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            func = function()
+                    if not to_big then
+                        function to_big(x) return x end
+                    end
+                    if BEARO.has_stop and (G.GAME.current_round.hands_left <= 0 and to_big(self.GAME.chips) < to_big(self.GAME.blind.chips)) or (GLOBAL_bearo_vanilla_override and to_big(self.GAME.chips) >= to_big(self.GAME.blind.chips)) then
+                        stop_use()
+                    elseif not BEARO.has_stop and (to_big(G.GAME.chips) - to_big(G.GAME.blind.chips) >= to_big(0) or G.GAME.current_round.hands_left < 1) then
+                        G.STATE = G.STATES.NEW_ROUND
+                    else
+                        G.STATE = G.STATES.DRAW_TO_HAND
+                    end
+
+                    G.STATE_COMPLETE = false
+                return true
+            end
+        }))
+    end
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "if Big:new(G.GAME.chips) >= Big:new(G.GAME.blind.chips) or G.GAME.current_round.hands_left < 1 then"
+position = "at"
+payload = '''
+if not to_big then
+	function to_big(x) return x end
+end
+if (G.GAME.current_round.hands_left <= 0 and to_big(self.GAME.chips) < to_big(self.GAME.blind.chips)) or (to_big(self.GAME.chips) >= to_big(self.GAME.blind.chips)) then
+	stop_use()
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''G.SETTINGS.play_button_pos == 1 and play_button or discard_button,'''
+position = "after"
+payload = '''
+{n=G.UIT.C, config={id = 'bearo_end_button',align = "tm", padding = 0.3, r = 0.1, minw = 1.3, minh = button_height, hover = true, colour = BEARO.has_stop and G.C.GREEN or G.C.UI.BACKGROUND_INACTIVE, button = "bearo_attempt_end_round", one_press = true, shadow = true, func = 'bearo_can_end_round'}, nodes={
+      {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+        {n=G.UIT.T, config={text = "End", scale = text_scale, colour = BEARO.has_stop and G.C.UI.TEXT_LIGHT or G.C.UI.TEXT_INACTIVE, focus_args = {button = 'y', orientation = 'bm'}, func = 'set_button_pip'}}
+      }}
+    }},
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "self.C.DARK_EDITION[2] = math.min(self.C.DARK_EDITION[3], self.C.DARK_EDITION[1])"
+position = "after"
+payload = '''
+	local bearo_red = self.C.RED
+	local bearo_green = self.C[G.bearo_colour]
+	if self.GAME and self.GAME.chips and self.GAME.blind and self.GAME.blind.chips then
+		if not to_big then
+			function to_big(x) return x end
+		end
+		if to_big(self.GAME.chips) >= to_big(self.GAME.blind.chips) then
+			self.C.CHIPS_REQUIRED[1] = bearo_green[1]
+			self.C.CHIPS_REQUIRED[2] = bearo_green[2]
+			self.C.CHIPS_REQUIRED[3] = bearo_green[3]
+		else
+			self.C.CHIPS_REQUIRED[1] = bearo_red[1]
+			self.C.CHIPS_REQUIRED[2] = bearo_red[2]
+			self.C.CHIPS_REQUIRED[3] = bearo_red[3]
+		end
+	else
+		self.C.CHIPS_REQUIRED[1] = bearo_red[1]
+		self.C.CHIPS_REQUIRED[2] = bearo_red[2]
+		self.C.CHIPS_REQUIRED[3] = bearo_red[3]
+	end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "{n=G.UIT.T, config={ref_table = G.GAME.blind, ref_value = 'chip_text', scale = 0.001, colour = G.C.RED, shadow = true, id = 'HUD_blind_count', func = 'blind_chip_UI_scale'}}"
+position = "at"
+payload = '''
+{n=G.UIT.T, config={ref_table = G.GAME.blind, ref_value = 'chip_text', scale = 0.001, colour = G.C.CHIPS_REQUIRED, shadow = true, id = 'HUD_blind_count', func = 'blind_chip_UI_scale'}}
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "globals.lua"
+pattern = "self.keybind_mapping = {{"
+position = "before"
+payload = '''
+self.C.CHIPS_REQUIRED = {0, 0, 0, 1}
+'''
+match_indent = true
+
+# [[patches]]
+# [patches.pattern]
+# target = "game.lua"
+# pattern = "if #G.hand.cards < 1 and #G.deck.cards < 1 and #G.play.cards < 1 then"
+# position = "at"
+# payload = '''
+# if not true then
+# '''
+# match_indent = true
+
+# ---------------------- Time to Stop End ------------------- #
+
+# ------------------- Custom Splash Screen ------------------ #
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "SC = Card(G.ROOM.T.w/2 - SC_scale*G.CARD_W/2, 10. + G.ROOM.T.h/2 - SC_scale*G.CARD_H/2, SC_scale*G.CARD_W, SC_scale*G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_joker'])"
+position = "after"
+payload = '''
+SC = Card(G.ROOM.T.w/2 - SC_scale*G.CARD_W/2, 10. + G.ROOM.T.h/2 - SC_scale*G.CARD_H/2, (SC_scale*G.CARD_W), (SC_scale*G.CARD_H), G.P_CARDS.empty, G.P_CENTERS['j_bearo_filthy'],{bypass_discovery_center = true, bypass_discovery_ui = true})
+'''
+match_indent = true
+
+# ------------------- Custom Splash Screen End -------------- #

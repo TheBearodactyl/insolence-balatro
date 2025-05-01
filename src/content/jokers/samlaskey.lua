@@ -13,10 +13,14 @@ SMODS.Sound {
             return 100
         elseif BEARO.MOD.config.samlaskey_music == 3 and music_countdown > G.TIMERS.UPTIME then
             return 100
+        elseif BEARO.MOD.config.samlaskey_music == 4 and music_countdown > G.TIMERS.UPTIME then
+            return 100
         else
         end
     end
 }
+
+local orig_cc = create_card
 
 SMODS.Joker {
     key = "samlaskey",
@@ -38,17 +42,15 @@ SMODS.Joker {
     perishable_compat = false,
     config = {
         extra = {
-            rental_rate_mod = 20
+            rental_rate_mod = 3
         }
     },
     loc_txt = {
         ["en-us"] = {
             name = "Sam Laskey",
             text = {
-                "Applies the following buffs:",
-                " -> Cards cannot be {C:attention}Debuffed{}",
-                " -> Rentals give {C:gold}$20{}",
-                -- " -> Perishables {C:attention}duplicate{} after {C:green}10{} {C:attention}rounds{}"
+                "{C:attention}Rentals{} give {C:gold}$#1#{}",
+                "All cards are {C:attention}Rental{}"
             }
         }
     },
@@ -60,34 +62,57 @@ SMODS.Joker {
         }
     end,
     add_to_deck = function(self, card, from_debuff)
+        local music_dur = 20
+        if BEARO.UTILS.count_num_of_joker_bearo("samlaskey") >= 1 then
+            music_dur = 199
+        end
+
         if not from_debuff then
-            music_countdown = G.TIMERS.UPTIME + 10.3
+            music_countdown = G.TIMERS.UPTIME + music_dur
 
             local juice_while = function()
-                return BEARO.MOD.config.samlaskey_music == 3
-                    and G.SETTINGS.SOUND.volume > 0
-                    and G.SETTINGS.SOUND.music_volume > 0
-                    and music_countdown > G.TIMERS.UPTIME
+                if BEARO.MOD.config.samlaskey_music == 3 then
+                    return G.SETTINGS.SOUND.volume > 0
+                        and G.SETTINGS.SOUND.music_volume > 0
+                        and music_countdown > G.TIMERS.UPTIME
+                elseif BEARO.MOD.config.samlaskey_music == 4 then
+                    return G.SETTINGS.SOUND.volume > 0
+                        and G.SETTINGS.SOUND.music_volume > 0
+                        and music_countdown > G.TIMERS.UPTIME
+                end
             end
 
             if juice_while() then
                 juice_card_until(card, juice_while)
             end
 
-            function Card:calculate_rental()
-                if self.ability.rental then
-                    ease_dollars(self.config.extra.rental_rate_mod)
-                    card_eval_status_text(self, "dollars", self.config.extra.rental_rate_mod)
-                end
+            G.GAME.rental_rate = -3
+            G.GAME.modifiers.enable_rentals_in_shop = true
+            function create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
+                local ret = orig_cc(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
+
+                ret:set_rental(true)
+
+                return ret
             end
         end
     end,
     remove_from_deck = function(self, card, from_debuff)
-        function Card:calculate_rental()
-            if self.ability.rental then
-                ease_dollars(-G.GAME.rental_rate)
-                card_eval_status_text(self, "dollars", -G.GAME.rental_rate)
-            end
+        G.GAME.rental_rate = 3
+        function create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
+            return orig_cc(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
         end
     end
 }
+
+G.FUNCS.has_laskey = function()
+    if G.jokers and BEARO then
+        if BEARO.UTILS.count_num_of_joker("bearo", "j_bearo_samlaskey") >= 1 then
+            return true
+        else
+            return false
+        end
+    end
+
+    return false
+end

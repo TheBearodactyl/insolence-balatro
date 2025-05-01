@@ -1,0 +1,12 @@
+{
+    "[lua]": {
+        "editor.quickSuggestions": {
+            "comments": "inline",
+            "other": "on",
+            "strings": "on"
+        },
+        "editor.semanticHighlighting.enabled": true,
+        "editor.codeLens": true,
+        "editor.suggest.localityBonus": true
+    }
+}

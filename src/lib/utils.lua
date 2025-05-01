@@ -44,6 +44,64 @@ BEARO.UTILS.largest_val = function(tbl)
     return mk
 end
 
+BEARO.UTILS.random_joker = function(seed, excluded_flags, banned_card, pool, no_undiscovered)
+    excluded_flags = excluded_flags or { "hidden", "no_doe", "no_grc" }
+    local selection = "n/a"
+    local passes = 0
+    local tries = 500
+
+    while true do
+        tries = tries - 1
+        passes = 0
+
+        local key = pseudorandom_element(pool or G.P_CENTER_POOLS.Joker, pseudoseed(seed or "grc")).key
+        selection = G.P_CENTERS[key]
+
+        if selection.discovered or not no_undiscovered then
+            if not banned_card or (banned_card and banned_card ~= key) then
+                passes = passes + 1
+            end
+        end
+
+        if passes >= #excluded_flags or tries <= 0 then
+            if tries <= 0 and no_undiscovered then
+                return G.P_CENTERS.c_strength
+            else
+                return selection
+            end
+        end
+    end
+end
+
+--- @param context CalcContext
+--- @return string
+BEARO.UTILS.suit_majority = function(context)
+    local suit_counts = {}
+
+    for _, suit in ipairs({"Hearts", "Diamonds", "Clubs", "Spades"}) do
+        suit_counts[suit] = 0
+    end
+
+    for _, card in ipairs(context.scoring_hand) do
+        local suit = card.base.suit
+        if suit_counts[suit] then
+            suit_counts[suit] = suit_counts[suit] + 1
+        end
+    end
+
+    local max_suit = "Hearts"
+    local max_count = 0
+
+    for suit, count in pairs(suit_counts) do
+        if count > max_count then
+            max_count = count
+            max_suit = suit
+        end
+    end
+
+    return max_suit
+end
+
 --- @param t table Table to reverse
 --- @return table # Reverses the order of keys in a table
 BEARO.UTILS.reverse_table = function(t)

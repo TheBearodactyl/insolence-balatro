@@ -4,7 +4,7 @@ local eds = {
     "bisexual",
     "bugged",
     "cellular",
-    "digitalink",
+    "printerink",
     "edgy",
     "gay",
     "lesbian",

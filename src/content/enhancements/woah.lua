@@ -23,7 +23,7 @@ BEARO.woah = SMODS.Enhancement {
             }
         }
     },
-    loc_vars = function (self, info_queue, card)
+    loc_vars = function(self, info_queue, card)
         return {
             vars = {
                 self.config.extra.e_chips_low,
@@ -50,7 +50,9 @@ BEARO.woah = SMODS.Enhancement {
                 trigger = "after",
                 delay = 0.2,
                 func = function()
-                    play_sound("bearo_woah")
+                    if BEARO.MOD.config.woah_sfx == true then
+                        play_sound("bearo_woah")
+                    end
                     card:juice_up(0.8, 0.5)
                     return true
                 end

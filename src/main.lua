@@ -1,14 +1,16 @@
 ---@diagnostic disable: duplicate-set-field
 
 BEARO = {}
+BEARO.has_stop = false
+G.bearo_colour = "GREEN"
 --- @type (table | Mod)?
 BEARO.MOD = SMODS.current_mod
 BEARO.MOD.optional_features = {
 	retrigger_joker = true,
 }
 
-SMODS.load_file("src/utils.lua")()
-SMODS.load_file("src/atlas.lua")()
+SMODS.load_file("src/lib/utils.lua")()
+SMODS.load_file("src/lib/atlas.lua")()
 SMODS.load_file("src/lib/modifiers.lua")()
 
 --- @type function
@@ -16,29 +18,27 @@ local incl = BEARO.UTILS.include_content
 
 -- Rarities
 incl("insolent", "rarities")
-incl("fleeting", "rarities")
-incl("defiant", "rarities")
+--incl("defiant", "rarities")
 incl("straw_hat", "rarities")
 
 -- Jokers
-incl("woah_joker", "jokers")    -- Common
+incl("woah_joker", "jokers") -- Common
 incl("eternalinator", "jokers") -- Uncommon
-incl("boobs", "jokers")         -- Uncommon
-incl("probablynot", "jokers")   -- Uncommon
-incl("fingertips", "jokers")    -- Rare
-incl("garry", "jokers")         -- Rare
-incl("heart_stop", "jokers")    -- Rare
-incl("the_sun", "jokers")       -- Legendary
-incl("rotoscoped", "jokers")    -- Insolent
-incl("timetostop", "jokers")    -- Insolent
-incl("samlaskey", "jokers")
-incl("metroman", "jokers")      -- Insolent
-incl("probably", "jokers")      -- Insolent
-incl("entropy", "jokers")       -- Insolent
-incl("mugiwara", "jokers")      -- Straw Hat
-incl("nami", "jokers")          -- Straw Hat
-incl("franky", "jokers")        -- Straw Hat
-incl("brook", "jokers")         -- Straw Hat
+incl("boobs", "jokers") -- Uncommon
+incl("probablynot", "jokers") -- Uncommon
+incl("fingertips", "jokers") -- Rare
+incl("garry", "jokers") -- Rare
+incl("heart_stop", "jokers") -- Rare
+incl("the_sun", "jokers") -- Legendary
+incl("rotoscoped", "jokers") -- Insolent
+incl("timetostop", "jokers") -- Insolent
+incl("samlaskey", "jokers") -- Insolent
+incl("metroman", "jokers") -- Insolent
+incl("probably", "jokers") -- Insolent
+incl("mugiwara", "jokers") -- Straw Hat
+incl("nami", "jokers") -- Straw Hat
+incl("franky", "jokers") -- Straw Hat
+incl("brook", "jokers") -- Straw Hat
 
 -- Enhancements
 incl("woah", "enhancements")
@@ -73,6 +73,7 @@ incl("woah_deck", "deck")
 incl("legendary_deck", "deck")
 incl("edition_decks", "deck")
 incl("tempered_glass_deck", "deck")
+incl("cloud_deck", "deck")
 
 -- Tweaks
 BEARO.UTILS.include("src/modifier_badges.lua")
@@ -112,7 +113,7 @@ SMODS.current_mod.config_tab = function()
 			--- @type table
 			colour = G.C.GREY,
 			outline = 0.7,
-			outline_colour = G.C.YELLOW
+			outline_colour = G.C.YELLOW,
 		},
 		nodes = {
 			{
@@ -140,7 +141,7 @@ SMODS.current_mod.config_tab = function()
 								config = {
 									text = "Settings",
 									scale = 0.75,
-								}
+								},
 							},
 						},
 					},
@@ -152,7 +153,7 @@ SMODS.current_mod.config_tab = function()
 					create_toggle({
 						label = "Enable Woah SFX",
 						ref_table = BEARO.MOD.config,
-						ref_value = "woah_sfx"
+						ref_value = "woah_sfx",
 					}),
 				},
 			},
@@ -182,7 +183,7 @@ SMODS.current_mod.config_tab = function()
 								config = {
 									text = "Music Options",
 									scale = 0.75,
-								}
+								},
 							},
 						},
 					},
@@ -210,9 +211,8 @@ SMODS.current_mod.config_tab = function()
 						ref_value = "samlaskey_music",
 						opt_callback = "bearo_cycle_options",
 					}),
-
-				}
-			}
+				},
+			},
 		},
 	}
 end

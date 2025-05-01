@@ -42,14 +42,16 @@ return {
                 "Always enabled",
                 "While owned",
                 "Shortly on bought",
-                "Disabled"
+                "Once on Buy",
+                "Disabled",
             },
 
             bearo_laskey_music_options = {
                 "Always enabled",
                 "While owned",
                 "Shortly on bought",
-                "Disabled"
+                "Once on Buy",
+                "Disabled",
             },
 
             bearo_music_description = {
