@@ -76,7 +76,7 @@ incl("tempered_glass_deck", "deck")
 incl("cloud_deck", "deck")
 
 -- Tweaks
-BEARO.UTILS.include("src/modifier_badges.lua")
+BEARO.UTILS.include("src/lib/modifier_badges.lua")
 incl("big_hand_formatting", "tweaks")
 incl("more_mod_badges", "tweaks")
 incl("custom_game_update", "tweaks")
@@ -86,7 +86,7 @@ incl("more_contexts", "tweaks")
 incl("boob_achievements", "achievements")
 
 if (SMODS.Mods["JokerDisplay"] or {}).can_load then
-	BEARO.UTILS.include("src/joker_disp.lua")
+	BEARO.UTILS.include("src/lib/joker_disp.lua")
 end
 
 G.FUNCS.bearo_cycle_options = function(args)
@@ -105,6 +105,7 @@ SMODS.current_mod.config_tab = function()
 			align = "cm",
 			--- @type number
 			minh = G.ROOM.T.h * 0.6,
+			--- @type number
 			minw = G.ROOM.T.w * 0.6,
 			--- @type number
 			padding = 0.5,
@@ -112,7 +113,9 @@ SMODS.current_mod.config_tab = function()
 			r = 0.1,
 			--- @type table
 			colour = G.C.GREY,
+			--- @type number
 			outline = 0.7,
+			--- @type table
 			outline_colour = G.C.YELLOW,
 		},
 		nodes = {
