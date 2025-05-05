@@ -59,7 +59,7 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
     vec4 tex = Texel(texture, texture_coords);
     vec2 uv = (((texture_coords) * (image_details)) - texture_details.xy * texture_details.ba) / texture_details.ba;
 
-    float distort = sin(time * 4.0) * 0.1;
+    float distort = sin(time) * 0.1;
     uv.x += sin(uv.y * 10.0 + time) * distort;
     uv.y += cos(uv.x * 10.0 + time) * distort;
 
@@ -68,9 +68,9 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
     vec3 colorC = vec3(0.5, 0.2, 0.7);
     vec3 colorD = vec3(0.9, 0.5, 0.1);
 
-    vec3 base_color = palette(uv.y * 4.0 + time * 0.5, colorA, colorB, colorC, colorD);
-    vec3 top_color = palette(uv.y * 2.0 + time * 0.2, colorB, colorA, colorC, colorD);
-    float vignette = smoothstep(1.0, 0.8, length(uv - vec2(0.5)));
+    vec3 base_color = palette(uv.y * 4.0 + time * 0.2, colorA, colorB, colorC, colorD);
+    vec3 top_color = palette(uv.y * 2.0 + time * 0.1, colorB, colorA, colorC, colorD);
+    float vignette = smoothstep(1.0, 0.5, length(uv - vec2(0.5)));
     vec4 final_color = mix(vec4(base_color, 1.0 + clamp(vaporwave.y, 0.0001, 0.0001)), vec4(top_color, 1.0), uv.y) * vec4(vignette);
 
     // tex.a = clamp(vaporwave.x, 0.75, 0.75);

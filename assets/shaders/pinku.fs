@@ -83,7 +83,7 @@ float fbm(vec2 p) {
     f += 0.250000 * noise(p);        p = mtx * p * 2.03;
     f += 0.125000 * noise(p);        p = mtx * p * 2.01;
     f += 0.062500 * noise(p);        p = mtx * p * 2.04;
-    f += 0.015625 * noise(p + sin(time));
+    f += 0.015625 * noise(p + cos(time));
 
     return f / 0.96875;
 }

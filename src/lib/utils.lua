@@ -22,6 +22,10 @@ BEARO.UTILS.include_content = function(name, type)
     SMODS.load_file("src/content/" .. type .. "/" .. name .. ".lua")()
 end
 
+BEARO.UTILS.override = function(name)
+    SMODS.load_file("src/overrides/" .. name .. ".lua")()
+end
+
 --- @param path string
 BEARO.UTILS.include = function(path)
     SMODS.load_file(path)()
@@ -42,6 +46,39 @@ BEARO.UTILS.largest_val = function(tbl)
     end
 
     return mk
+end
+
+--- @param context CalcContext
+BEARO.UTILS.sort_jokers = function(context)
+    local owned_joker_rets = {}
+
+    for i, jkr in ipairs(G.jokers.cards) do
+        local res = jkr:calculate_joker(context)
+        table.insert(owned_joker_rets, res)
+    end
+
+    table.sort(owned_joker_rets, function (a, b)
+        if a == nil then return false end
+        if b == nil then return false end
+
+        if type(a) == "number" and (a > 0 or a < 0) and a.chips then
+            if type(b) ~= "number" then return true end
+            return a > b
+        elseif  type(a) == "table" and a.mult then
+            if type(b) ~= "table" or not b.mult then return true end
+            return a.mult > b.mult
+        elseif type(a) == "table" and (a.Xmult or a.Xmult_mod) then
+            local amod = a.Xmult or a.Xmult_mod
+            if type(b) ~= "table" or not (b.Xmult or b.Xmult_mod) then return true end
+            local bmod = b.Xmult or b.Xmult_mod
+
+            return amod > bmod
+        end
+
+        return false
+    end)
+
+    return owned_joker_rets
 end
 
 BEARO.UTILS.random_joker = function(seed, excluded_flags, banned_card, pool, no_undiscovered)

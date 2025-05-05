@@ -51,6 +51,10 @@ vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv)
     return vec4(shadow ? vec3(0.,0.,0.) : tex.xyz, res > adjusted_dissolve ? (shadow ? tex.a*0.3: tex.a) : .0);
 }
 
+float normalize_time() {
+    return clamp(sin(time), 0.0, 1.0);
+}
+
 vec2 offsets[8] = vec2[](
     vec2(-1.0, -1.0), vec2(0.0, -1.0), vec2(1.0, -1.0),
     vec2(-1.0,  0.0), vec2(1.0,  0.0),
@@ -59,15 +63,14 @@ vec2 offsets[8] = vec2[](
 
 vec4 edge_detection(vec4 tex, Image texture, vec2 texture_coords, vec3 edge_colour) {
     vec3 sum = vec3(0.0);
-    //float sensitivity = ;
-    float sensitivity = 0.5;
+    float sensitivity = 0.6;
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 9; i++) {
         vec2 offset_coord = texture_coords + offsets[i] * 0.03 + (clamp(edgy.y, 0.0, 0.01) - clamp(edgy.y, 0.0, 0.01));
         sum += Texel(texture, clamp(offset_coord, vec2(0.0), vec2(1.0))).rgb;
     }
 
-    vec3 average = sum / 8.0;
+    vec3 average = sum / 9.0;
     float edge_factor = length(tex.rgb - average);
 
     return edge_factor > sensitivity ? vec4(edge_colour, tex.a) : vec4(vec3(0.0), tex.a);
@@ -77,7 +80,7 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
     vec4 tex = Texel(texture, texture_coords);
     vec2 uv = (((texture_coords) * (image_details)) - texture_details.xy * texture_details.ba) / texture_details.ba;
 
-    vec3 edge_color = vec3(1.0, 0.0, 1.0);
+    vec3 edge_color = vec3(normalize_time(), cos(normalize_time()), sin(normalize_time()));
     vec4 edge_tex = edge_detection(tex, texture, texture_coords, edge_color);
 
     return dissolve_mask(edge_tex * colour, texture_coords, uv);

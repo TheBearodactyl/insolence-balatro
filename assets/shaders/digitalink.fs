@@ -13,12 +13,13 @@ extern bool shadow;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_1;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_2;
 
-#define NUM_LAYERS 11.0
-#define ITER       15
-#define MAX_STEPS  40
+#define NUM_LAYERS 50.0
+#define ITER       10
+#define MAX_STEPS  20
 #define MAX_DIST   1000.0
-#define STACK_DENS 100.0
-#define SURF_DIST  0.005
+#define STACK_DENS 20.0
+#define SURF_DIST  0.1
+#define BUBBLY     1.0
 
 vec4 digitalinktex(vec3 p) {
     float t  = time + 78.0;
@@ -50,7 +51,8 @@ float raymarch(vec3 ro, vec3 rd) {
         vec3 p = ro + rd * dO;
         float dS = map(p);
         if (dS < SURF_DIST) break;
-        dO += dS;
+        if (BUBBLY == 1.0) dO += dS;
+        if (BUBBLY == 0.0) dO -= dS;
         if (dO > MAX_DIST) break;
     }
 

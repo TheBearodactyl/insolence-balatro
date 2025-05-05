@@ -11,8 +11,7 @@ SMODS.Edition {
             name = "Voronoi",
             label = "Ever Changing",
             text = {
-                "Gives {C:red}+#1#{} mult",
-                "{C:inactive}(Gives the number of {C:attention}Cards{}{C:inactive} in {C:attention}Deck{}{C:inactive} divided by {C:green}PI{}{C:inactive}){}"
+                "Gives {C:red}+#1#{} mult and {C:blue}-#2#{} chips",
             }
         }
     },
@@ -20,13 +19,14 @@ SMODS.Edition {
         if G.deck then
             return {
                 vars = {
-                    #G.deck.cards / 3.14159265359
+                    math.abs(math.cos(#G.deck.cards / math.pi)),
+                    -math.abs(math.sin(#G.deck.cards / math.pi))
                 }
             }
         else
             return {
                 vars = {
-                    52 / 3.14159265359
+                    52 / math.pi
                 }
             }
         end
@@ -36,7 +36,8 @@ SMODS.Edition {
             return {
                 message = "E v e r C h a n g i n g",
                 card = card,
-                mult_mod = #G.deck.cards / 3.14159265359
+                mult_mod = math.abs(math.cos(#G.deck.cards / math.pi)),
+                chips = -math.abs(math.sin(#G.deck.cards / math.pi))
             }
         end
     end

@@ -54,10 +54,10 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords,
   pix = mix(pix, col2, disks);
 
   // Moving disks
-  float speed = 50.0;
+  float speed = 1.0;
   float tt = time * speed + 0.1 * i + 0.08 * j;
-  float stopEveryAngle = 3.14159265359 / 2.0;
-  float stopRatio = 0.7 + cellular.x;
+  float stopEveryAngle = 3.14159265359 / 5.0;
+  float stopRatio = 0.7 + clamp(cellular.y, 0.0000001, 0.0000001);
   float t1 = (floor(tt) + smoothstep(0.0, 1.0 - stopRatio, fract(tt))) *
              stopEveryAngle;
 
@@ -70,7 +70,7 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords,
   // Central disk with glow effect
   rad = 0.2 + 0.05 * sin(time * (1.0 + 0.01 * i));
   disks = disk(r3, vec2(0.0, 0.0), rad);
-  pix += 0.2 * col3 * disks * sin(time + i * j + i);
+  pix += 0.2 * col3 * disks * sin(time + i * j - i);
 
   // Darken edges
   pix -= smoothstep(0.3, 5.5, length(r));

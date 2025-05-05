@@ -14,7 +14,6 @@ extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_1;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_2;
 
 uniform MY_HIGHP_OR_MEDIUMP vec3 iResolution;
-uniform float iTime;
 
 float hash(vec2 p) {
     return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
@@ -41,7 +40,7 @@ vec3 gen_stars(vec2 r, float star_density) {
     float star            = mix(noise_layer_one, noise_layer_two, 0.5);
 
     star  = mix(star, noise_layer_thr, 0.2);
-    star += 0.05 * sin(iTime * 2.0 + star_pos.x * 0.2);
+    star += 0.05 * sin(time * 2.0 + star_pos.x * 0.2);
     star  = smoothstep(0.875, 1.0, star);
 
     vec3 star_col = vec3(1.0);
@@ -91,18 +90,18 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
     vec4 tex = Texel(texture, texture_coords);
     vec2 uv  = (((texture_coords) * (image_details)) - texture_details.xy * texture_details.ba) / texture_details.ba;
 
-    int num_bands       = 5;
+    int num_bands       = 10;
     float bands_spacing = 1.5 / float(num_bands);
 
-    vec3 start_color = vec3(0.4, 0.0, 0.6);
+    vec3 start_color = vec3(0.4, 0.0, 0.2);
     vec3 end_color   = vec3(0.0, 0.0, 0.4);
     vec3 final_color = mix(start_color, end_color, (uv.y + 1.0) / 2.0);
 
-    float star_density = 0.5;
+    float star_density = 5;
     vec3 star_color    = gen_stars(uv, star_density);
 
     for (int i = 0; i < num_bands; i++) {
-        float offset = -0.8 + bands_spacing * (float(i) + 0.5);
+        float offset = -0.7 + bands_spacing * (float(i) + 0.5);
         vec2  r_wave = uv;
 
         r_wave.y -= offset;
@@ -110,16 +109,16 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
         float noise_seed = float(i) * 0.1;
         float dir        = mod(float(i), 2.0) * 2.0 - 1.0;
 
-        float wave_one = noise(vec2(r_wave.x * 3.0 + dir * iTime * 0.5, noise_seed)) * 0.3;
-        float wave_two = noise(vec2(r_wave.x * 5.0 + dir * iTime * 1.0, noise_seed + 2.0)) * 0.4;
-        float wave_thr = noise(vec2(r_wave.x * 2.0 + dir * iTime * 1.5, noise_seed + 4.0)) * 0.3;
+        float wave_one = noise(vec2(r_wave.x * 3.0 + dir * time * 0.5, noise_seed)) * 0.3;
+        float wave_two = noise(vec2(r_wave.x * 5.0 + dir * time * 1.0, noise_seed + 2.0)) * 0.4;
+        float wave_thr = noise(vec2(r_wave.x * 2.0 + dir * time * 1.5, noise_seed + 4.0)) * 0.3;
         float wave_off = wave_one + wave_two + wave_thr;
 
-        r_wave.y += wave_off * 0.4;
+        r_wave.y += wave_off * 0.9;
 
-        float band_thickness = 1.0 - abs(r_wave.y) * 1.2;
+        float band_thickness = 1.0 - abs(r_wave.y) * 2.2;
 
-        band_thickness = clamp(band_thickness, 0.0, 1.0);
+        band_thickness = clamp(band_thickness, 0.0, 5.0);
 
         float shape = band_thickness;
         shape       = clamp(shape, 0.0, 1.0);
@@ -127,7 +126,7 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
         vec3 base_color = mix(vec3(0.1, 1.0, 0.6), vec3(0.0, 0.3, 1.0), r_wave.y + 0.5);
         vec3 glow       = vec3(0.0, 0.6, 0.9) * smoothstep(-1.0, -0.3, r_wave.y);
         vec3 color      = mix(base_color, vec3(0.0), 1.0 - shape);
-        color          += glow * 0.1;
+        color          += glow * 0.5;
         final_color    += color * shape;
     }
 

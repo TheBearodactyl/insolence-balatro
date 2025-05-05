@@ -421,7 +421,7 @@ vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv) {
     }
   }
 
-  return vec4(shadow ? vec3(0., 0., bocchi.y) : tex.xyz,
+  return vec4(shadow ? vec3(0., 0., 0.) : tex.xyz,
               res > adjusted_dissolve ? (shadow ? tex.a * 0.3 : tex.a) : .0);
 }
 
@@ -429,7 +429,7 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
   vec4 tex = Texel(texture, texture_coords);
   vec2 uv = (((texture_coords) * (image_details)) - texture_details.xy * texture_details.ba) / texture_details.ba;
 
-  vec3 col = f(vec2(0.0));
+  vec3 col = f(vec2(bocchi.x));
   vec4 final_color = vec4(col, 0.5);
 
   return dissolve_mask(tex * final_color, texture_coords, uv);

@@ -21,7 +21,7 @@ uniform MY_HIGHP_OR_MEDIUMP vec3 iResolution;
 uniform float iTime;
 
 #define S(a, b, t) smoothstep(a, b, t)
-#define NUM_LAYERS 7.0
+#define NUM_LAYERS 4.0
 //#define SIMPLE
 
 float n21(vec2 p) {
@@ -176,11 +176,11 @@ vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords)
 
     #ifdef SIMPLE
     uv *= 10.0;
-    col = vec3(1) * net_layer(uv, 0.0, time);
+    col = vec3(1) * net_layer(uv, 0.0, time * 10.0);
     uv = fract(uv);
     #else
     col *= 2.0 - dot(uv, uv);
-    t    = mod(time, 230.0);
+    t    = mod(time, 120.0);
     col *= S(0.0, 22.0, t) * S(234.0, 230.0, t);
     #endif
     

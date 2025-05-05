@@ -78,13 +78,13 @@ vec2 voronoifx(in vec2 x) {
 vec4 effect(vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords) {
     vec4 tex = Texel(texture, texture_coords);
     vec2 uv = (((texture_coords) * (image_details)) - texture_details.xy * texture_details.ba) / texture_details.ba;
-    vec2 c = voronoifx((14.0 + 6.0 * sin(0.2 * time)) * uv);
+    vec2 c = voronoifx((14.0 + 6.0 * sin(0.1 * time)) * uv);
     vec3 col = 0.5 + 0.5 * cos(c.y * 6.2831 + vec3(0.0, 0.1, 2.0));
 
     col *= clamp(1.0 - 0.4 * c.x * c.x, 0.0, 1.0);
-    col -= (1.0 - smoothstep(0.08, 0.09, c.x));
+    col -= (1.0 - smoothstep(0.01, 0.09, c.x));
 
-    vec4 final_color = vec4(col, 1.0 + clamp(voronoi.x, 0.0, 0.0001));
+    vec4 final_color = vec4(col, 0.8 + clamp(voronoi.x, 0.0, 0.0001));
 
     return dissolve_mask(tex * final_color, texture_coords, uv);
 }
