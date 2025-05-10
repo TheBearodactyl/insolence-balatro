@@ -190,13 +190,13 @@ match_indent = true
 
 # -------------------- Misc Patches ------------------------- #
 
-# -- Actually update shaders based on the REAL timer (or the current time if that isn't available)
+# -- Actually update shaders based on the `REAL` timer (or the current time if that isn't available) -- #
 [[patches]]
 [patches.pattern]
 target = "engine/sprite.lua"
 pattern = '''G.SHADERS[_shader or 'dissolve']:send("time",123.33412*(_draw_major.ID/1.14212 or 12.5123152)%3000)'''
 position = "at"
-payload = '''G.SHADERS[_shader or 'dissolve']:send("time",G.TIMERS.REAL or os.clock())'''
+payload = '''G.SHADERS[_shader or 'dissolve']:send("time", G.TIMERS.REAL)'''
 match_indent = true
 
 # --------------------- Misc Patches End --------------------- #

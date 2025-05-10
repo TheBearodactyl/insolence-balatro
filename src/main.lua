@@ -12,6 +12,9 @@ BEARO.MOD.optional_features = {
 SMODS.load_file("src/lib/utils.lua")()
 SMODS.load_file("src/lib/atlas.lua")()
 SMODS.load_file("src/lib/modifiers.lua")()
+if (SMODS.Mods["DebugPlus"] or {}).can_load then
+	SMODS.load_file("src/lib/debug_plus.lua")()
+end
 
 --- @type function
 local incl = BEARO.UTILS.include_content
@@ -52,12 +55,12 @@ incl("the_flower", "consumables")
 incl("supernova", "consumables")
 
 -- Editions
--- include("bocchi", "editions") -- shader is bugged
 incl("lesbian", "editions")
 incl("gay", "editions")
 incl("bisexual", "editions")
 incl("trans", "editions")
 incl("ace", "editions")
+incl("bocchi", "editions")
 incl("cellular", "editions")
 incl("edgy", "editions")
 incl("vaporwave", "editions")
@@ -67,6 +70,11 @@ incl("universe", "editions")
 incl("pinku", "editions")
 incl("digitalink", "editions")
 incl("bugged", "editions")
+incl("wavy", "editions")
+incl("bubbly", "editions")
+incl("equalize", "editions")
+incl("lightshow", "editions")
+incl("tiled", "editions")
 
 -- Decks
 incl("woah_deck", "deck")

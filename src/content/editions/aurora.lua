@@ -1,41 +1,41 @@
-SMODS.Shader {
-    key = "aurora",
-    path = "aurora.fs"
-}
+SMODS.Shader({
+	key = "aurora",
+	path = "aurora.fs",
+})
 
-SMODS.Edition {
-    key = "aurora_ed",
-    shader = "aurora",
-    config = {
-        extra = 1.05
-    },
-    loc_txt = {
-        ["en-us"] = {
-            name = "Aurora",
-            label = "Aurora Borealis",
-            text = {
-                "Gives {X:planet,C:white,s:5,E:1}^^#1#{} mult."
-            }
-        }
-    },
-    loc_vars = function (self, info_queue, card)
-        return {
-            vars = {
-                self.config.extra
-            }
-        }
-    end,
-    calculate = function(self, card, context)
-        if context.cardarea == G.play and context.main_scoring then
-            return {
-                eemult = self.config.extra
-            }
-        end
+SMODS.Edition({
+	key = "aurora_ed",
+	shader = "aurora",
+	config = {
+		extra = 1.05,
+	},
+	loc_txt = {
+		["en-us"] = {
+			name = "Aurora",
+			label = "Aurora Borealis",
+			text = {
+				"Gives {X:planet,C:white,s:5,E:1}^^#1#{} mult.",
+			},
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				self.config.extra,
+			},
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.cardarea == G.play and context.main_scoring then
+			return {
+				eemult = self.config.extra,
+			}
+		end
 
-        if context.cardarea == G.jokers and context.joker_main then
-            return {
-                eemult = self.config.extra
-            }
-        end
-    end
-}
+		if context.cardarea == G.jokers and context.joker_main then
+			return {
+				eemult = self.config.extra,
+			}
+		end
+	end,
+})

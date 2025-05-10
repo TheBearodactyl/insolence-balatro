@@ -1,19 +1,19 @@
-SMODS.Shader {
-    key = "digitalink",
-    path = "digitalink.fs"
-}
+SMODS.Shader({
+	key = "digitalink",
+	path = "digitalink.fs",
+})
 
-SMODS.Edition {
-    key = "printerink_ed",
-    shader = "digitalink",
-    loc_txt = {
-        ["en-us"] = {
-            name = "Printer Ink",
-            label = "Grainy and Smeared",
-            text = { "A better Wild Card" }
-        }
-    },
-}
+SMODS.Edition({
+	key = "printerink_ed",
+	shader = "digitalink",
+	loc_txt = {
+		["en-us"] = {
+			name = "Printer Ink",
+			label = "Grainy and Smeared",
+			text = { "A better Wild Card" },
+		},
+	},
+})
 
 -- Bugged???
 -- function Card:is_suit(suit, bypass_debuff, flush_calc)

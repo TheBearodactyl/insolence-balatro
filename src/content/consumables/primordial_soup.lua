@@ -1,103 +1,103 @@
-SMODS.Consumable {
-    key = "primordial_soup",
-    atlas = "consumables",
-    pos = { x = 1, y = 0 },
-    config = {},
-    cost = 3,
-    unlocked = true,
-    discovered = true,
-    set = "Spectral",
-    order = 13,
-    loc_txt = {
-        ["en-us"] = {
-            name = "Primordial Soup",
-            text = {
-                "Adds {C:attention}Cellulite{} to {C:green}1{} selected {C:attention}playing card{}"
-            }
-        }
-    },
-    can_use = function(self, card)
-        return (#G.hand.highlighted == 1)
-    end,
-    use = function(self, card, area, copier)
-        local used_consumable = copier or card
-        local aaaaaa = {}
+SMODS.Consumable({
+	key = "primordial_soup",
+	atlas = "consumables",
+	pos = { x = 1, y = 0 },
+	config = {},
+	cost = 3,
+	unlocked = true,
+	discovered = true,
+	set = "Spectral",
+	order = 13,
+	loc_txt = {
+		["en-us"] = {
+			name = "Primordial Soup",
+			text = {
+				"Adds {C:attention}Cellulite{} to {C:green}1{} selected {C:attention}playing card{}",
+			},
+		},
+	},
+	can_use = function(self, card)
+		return (#G.hand.highlighted == 1)
+	end,
+	use = function(self, card, area, copier)
+		local used_consumable = copier or card
+		local aaaaaa = {}
 
-        for _, value in ipairs(G.hand.highlighted) do
-            if value ~= card then
-                table.insert(aaaaaa, value)
-            end
-        end
+		for _, value in ipairs(G.hand.highlighted) do
+			if value ~= card then
+				table.insert(aaaaaa, value)
+			end
+		end
 
-        local selected_card = aaaaaa[1]
+		local selected_card = aaaaaa[1]
 
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.4,
-            func = function()
-                play_sound("tarot1")
-                used_consumable:juice_up(0.3, 0.5)
-                return true
-            end,
-        }))
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.4,
+			func = function()
+				play_sound("tarot1")
+				used_consumable:juice_up(0.3, 0.5)
+				return true
+			end,
+		}))
 
-        local percent = 1.15 - (1 - 0.999) / (1 - 0.998) * 0.3
+		local percent = 1.15 - (1 - 0.999) / (1 - 0.998) * 0.3
 
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.15,
-            func = function()
-                selected_card:flip()
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.15,
+			func = function()
+				selected_card:flip()
 
-                play_sound("card1", percent)
+				play_sound("card1", percent)
 
-                selected_card:juice_up(0.3, 0.3)
+				selected_card:juice_up(0.3, 0.3)
 
-                return true
-            end,
-        }))
+				return true
+			end,
+		}))
 
-        delay(0.2)
+		delay(0.2)
 
-        local percent = 0.85 + (1 - 0.999) / (1 - 0.998) * 0.3
+		local percent = 0.85 + (1 - 0.999) / (1 - 0.998) * 0.3
 
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.15,
-            func = function()
-                local one_edition = selected_card.edition
-                selected_card:flip()
-                selected_card:set_edition({ bearo_cellular_ed = true })
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.15,
+			func = function()
+				local one_edition = selected_card.edition
+				selected_card:flip()
+				selected_card:set_edition({ bearo_cellular_ed = true })
 
-                play_sound("card1", percent)
+				play_sound("card1", percent)
 
-                selected_card:juice_up(0.3, 0.3)
+				selected_card:juice_up(0.3, 0.3)
 
-                return true
-            end
-        }))
+				return true
+			end,
+		}))
 
-        delay(0.2)
+		delay(0.2)
 
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.4,
-            func = function()
-                play_sound("tarot2")
-                used_consumable:juice_up(0.3, 0.5)
-                return true
-            end
-        }))
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.4,
+			func = function()
+				play_sound("tarot2")
+				used_consumable:juice_up(0.3, 0.5)
+				return true
+			end,
+		}))
 
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.2,
-            func = function()
-                G.hand:unhighlight_all()
-                G.jokers:unhighlight_all()
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.2,
+			func = function()
+				G.hand:unhighlight_all()
+				G.jokers:unhighlight_all()
 
-                return true
-            end
-        }))
-    end
-}
+				return true
+			end,
+		}))
+	end,
+})
