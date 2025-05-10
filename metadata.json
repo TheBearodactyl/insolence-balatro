@@ -8,7 +8,7 @@
   "description": "woah",
   "main_file": "src/main.lua",
   "badge_colour": "ff00bb",
-  "version": "0.1.0",
+  "version": "1.0.4",
   "priority": 10398093047,
   "dependencies": [
     "Talisman (>=2.0.9)",
