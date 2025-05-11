@@ -1,6 +1,7 @@
 ---@diagnostic disable: duplicate-set-field
 
 BEARO = {}
+BEARO.defeated_will_smith = false
 BEARO.has_stop = false
 G.bearo_colour = "GREEN"
 --- @type (table | Mod)?
@@ -86,6 +87,9 @@ incl("legendary_deck", "deck")
 incl("edition_decks", "deck")
 incl("tempered_glass_deck", "deck")
 incl("cloud_deck", "deck")
+
+incl("chris_rock", "blinds")
+incl("will_smith", "blinds")
 
 -- Tweaks
 BEARO.UTILS.include("src/lib/modifier_badges.lua")

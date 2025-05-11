@@ -16,6 +16,7 @@ BEARO.UTILS.H = {}
 --- | "tweaks"       # A Tweak
 --- | "stakes"       # A Stake
 --- | "poker_hands"  # A Poker Hand
+--- | "blinds"       # A Blind
 
 --- @param name string
 --- @param type include_type
