@@ -53,6 +53,7 @@ incl("primordial_soup", "consumables")
 incl("wulz", "consumables")
 incl("the_flower", "consumables")
 incl("supernova", "consumables")
+incl("tiler", "consumables")
 
 -- Editions
 incl("lesbian", "editions")
@@ -75,6 +76,9 @@ incl("bubbly", "editions")
 incl("equalize", "editions")
 incl("lightshow", "editions")
 incl("tiled", "editions")
+incl("synth", "editions")
+incl("kleinian", "editions")
+incl("fractal", "editions")
 
 -- Decks
 incl("woah_deck", "deck")
@@ -89,6 +93,9 @@ incl("big_hand_formatting", "tweaks")
 incl("more_mod_badges", "tweaks")
 incl("custom_game_update", "tweaks")
 incl("more_contexts", "tweaks")
+
+-- Poker Hands
+incl("three_pair", "poker_hands")
 
 -- Achievements
 incl("boob_achievements", "achievements")

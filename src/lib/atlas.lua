@@ -60,3 +60,10 @@ SMODS.Atlas({
 	py = 93 / 2,
 	path = "strawhat.png",
 })
+
+SMODS.Atlas({
+	key = "planets",
+	px = 71,
+	py = 95,
+	path = "planets.png",
+})

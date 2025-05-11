@@ -5,5 +5,14 @@ SMODS.Shader {
 
 SMODS.Edition {
     key = "lightshow_ed",
-    shader = "lightshow"
+    shader = "lightshow",
+    loc_txt = {
+        ["en-us"] = {
+            name = "Lightshow",
+            label = "so pretty :D",
+            text = {
+                "TODO"
+            }
+        }
+    }
 }

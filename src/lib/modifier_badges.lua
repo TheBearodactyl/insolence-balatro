@@ -47,4 +47,13 @@ BEARO.MODIFIER_BADGES = {
 		tcol = G.C.BLACK,
 		col = G.C.WHITE,
 	},
+	unoriginal_shader = {
+		text = {
+			"NON-ORIGINAL SHADER",
+			"THIS SHADER IS NOT",
+			"WRITTEN BY ME"
+		},
+		tcol = G.C.WHITE,
+		col = G.C.RED
+	}
 }

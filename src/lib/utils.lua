@@ -15,6 +15,7 @@ BEARO.UTILS.H = {}
 --- | "rarities"     # A Rarity
 --- | "tweaks"       # A Tweak
 --- | "stakes"       # A Stake
+--- | "poker_hands"  # A Poker Hand
 
 --- @param name string
 --- @param type include_type
@@ -46,6 +47,25 @@ BEARO.UTILS.largest_val = function(tbl)
 	end
 
 	return mk
+end
+
+--- @param tbl table
+BEARO.UTILS.average_table_amt = function(tbl)
+	local sum = 0
+	local count = 0
+
+	for _, value in ipairs(tbl) do
+		if type(value) == "number" then
+			sum = sum + value
+			count = count + 1
+		end
+	end
+
+	if count == 0 then
+		return 3
+	else
+		return sum / count
+	end
 end
 
 --- @param context CalcContext
