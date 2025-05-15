@@ -199,4 +199,23 @@ position = "at"
 payload = '''G.SHADERS[_shader or 'dissolve']:send("time", G.TIMERS.REAL)'''
 match_indent = true
 
+# -- Also update `mouse_screen_pos` based on the current position of the mouse pointer -- #
+[[patches]]
+[patches.pattern]
+target = "engine/sprite.lua"
+pattern = '''G.SHADERS[_shader or 'dissolve']:send("mouse_screen_pos",self.ARGS.prep_shader.cursor_pos)'''
+position = "at"
+payload = '''G.SHADERS[_shader or 'dissolve']:send("mouse_screen_pos", love.mouse.getPosition())'''
+match_indent = true
+
+# [[patches]]
+# [patches.pattern]
+# target = "engine/node.lua"
+# pattern = "if self.children.h_popup then"
+# position = 'at'
+# payload = '''
+# if self.children.h_popup and not (self.force_popup and self:force_popup()) then
+# '''
+# match_indent = true
+
 # --------------------- Misc Patches End --------------------- #

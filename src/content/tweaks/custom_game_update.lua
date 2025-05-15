@@ -4,7 +4,7 @@ local bearo_roto_dt = 0
 local bearo_metro_dt = 0
 local bearo_garry_dt = 0
 local bearo_stop_dt = 0
-local bearo_dash_dt = 0
+local bearo_natsuri_dt = 0
 function Game:update(dt)
 	g_up(self, dt)
 
@@ -14,7 +14,7 @@ function Game:update(dt)
 	bearo_metro_dt = bearo_metro_dt + dt
 	bearo_garry_dt = bearo_garry_dt + dt
 	bearo_stop_dt = bearo_stop_dt + dt
-	bearo_dash_dt = bearo_dash_dt + dt
+	bearo_natsuri_dt = bearo_natsuri_dt + dt
 
 	if G.P_CENTERS and G.P_CENTERS.j_bearo_roto and bearo_roto_dt > 0.1 then
 		bearo_roto_dt = 0
@@ -80,19 +80,19 @@ function Game:update(dt)
 		end
 	end
 
-	if G.P_CENTERS and G.P_CENTERS.j_bearo_mimendash and bearo_dash_dt > 0.025 then
-		bearo_dash_dt = 0
+	if G.P_CENTERS and G.P_CENTERS["j_bearo_natsuri"] and bearo_natsuri_dt > 0.5 then
+		bearo_natsuri_dt = 0
 
-		local dash_obj = G.P_CENTERS.j_bearo_mimendash
+		local natsuri_obj = G.P_CENTERS["j_bearo_natsuri"]
 
-		if dash_obj.pos.x == 200 and dash_obj.pos.y == 18 then
-			dash_obj.pos.x = 0
-			dash_obj.pos.y = 0
-		elseif dash_obj.pos.x < 200 then
-			dash_obj.pos.x = dash_obj.pos.x + 1
-		elseif dash_obj.pos.y < 18 then
-			dash_obj.pos.x = 0
-			dash_obj.pos.y = dash_obj.pos.y + 1
+		if natsuri_obj.pos.x == 3 and natsuri_obj.pos.y == 1 then
+			natsuri_obj.pos.x = 0
+			natsuri_obj.pos.y = 0
+		elseif natsuri_obj.pos.x < 9 then
+			natsuri_obj.pos.x = natsuri_obj.pos.x + 1
+		elseif natsuri_obj.pos.y < 1 then
+			natsuri_obj.pos.x = 0
+			natsuri_obj.pos.y = natsuri_obj.pos.y + 1
 		end
 	end
 

@@ -1,27 +1,30 @@
 SMODS.Consumable({
-	key = "tiler",
+	key = "nullptr",
 	atlas = "consumables",
-	pos = {
-		x = 6,
-		y = 0,
-	},
+	pos = { x = 8, y = 0 },
+	config = {},
+	cost = 4,
+	unlocked = true,
+	discovered = true,
 	set = "Spectral",
+	order = 15,
 	loc_txt = {
 		["en-us"] = {
-			name = "The Tiler",
+			name = "nullptr",
 			text = {
-				"Adds the {C:attention}Tiled{} edition",
-				"to {C:attention}One{} selected {C:attention}Playing Card",
+				"Exception thrown at {C:attention}"
+					.. BEARO.UTILS.rand_mem_addr()
+					.. "{} in Balatro.exe: {C:attention}"
+					.. BEARO.UTILS.rand_mem_addr()
+					.. "{}: Access violation reading {C:attention}"
+					.. BEARO.UTILS.rand_mem_addr()
+					.. "{}.",
 			},
 		},
 	},
-	cost = 3,
-	order = 14,
+	ignore_base_shader = true,
 	can_use = function(self, card)
 		return (#G.hand.highlighted == 1)
-	end,
-	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue + 1] = G.P_CENTERS["e_bearo_tiled_ed"]
 	end,
 	use = function(self, card, area, copier)
 		local used_consumable = copier or card
@@ -71,7 +74,7 @@ SMODS.Consumable({
 			func = function()
 				local one_edition = selected_card.edition
 				selected_card:flip()
-				selected_card:set_edition({ bearo_tiled_ed = true })
+				selected_card:set_edition({ bearo_bugged_ed = true })
 
 				play_sound("card1", percent)
 

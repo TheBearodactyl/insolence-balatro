@@ -51,9 +51,16 @@ BEARO.MODIFIER_BADGES = {
 		text = {
 			"NON-ORIGINAL SHADER",
 			"THIS SHADER IS NOT",
-			"WRITTEN BY ME"
+			"WRITTEN BY ME",
 		},
 		tcol = G.C.WHITE,
-		col = G.C.RED
+		col = G.C.RED,
+	},
+	natsuri = {
+		text = {
+			"Girls Kissing"
+		},
+		tcol = G.C.WHITE,
+		col = G.C.PURPLE
 	}
 }

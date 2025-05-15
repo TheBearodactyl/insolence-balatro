@@ -17,6 +17,12 @@ SMODS.Joker({
 				"{X:gold,C:white}death.{}",
 			},
 		},
+		["ja"] = {
+			name = "ブック",
+			text = {
+				"{X:gold,C:white}死.{}"
+			}
+		}
 	},
 	calculate = function(self, card, context)
 		if context.game_over and G.GAME.chips / G.GAME.blind.chips >= to_big(0.1) then

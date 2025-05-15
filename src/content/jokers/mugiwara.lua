@@ -112,23 +112,16 @@ SMODS.Joker({
 				local check = false
 
 				-- if not Card.no(G.jokers.cards[jkr], "immutable", true) then
-					Cryptid.with_deck_effects(G.jokers.cards[jkr], function(crd)
-						Cryptid.misprintize(crd, { min = self.config.extra.gear, max = self.config.extra.gear }, nil, true)
-					end)
+				Cryptid.with_deck_effects(G.jokers.cards[jkr], function(crd)
+					Cryptid.misprintize(crd, { min = self.config.extra.gear, max = self.config.extra.gear }, nil, true)
+				end)
 				-- end
 				check = true
 				if check then
-					card_eval_status_text(
-						context.blueprint_card or card,
-						"extra",
-						nil,
-						nil,
-						nil,
-						{
-							message = localize("k_upgrade_ex"),
-							colour = G.C.GREEN
-						}
-					)
+					card_eval_status_text(context.blueprint_card or card, "extra", nil, nil, nil, {
+						message = localize("k_upgrade_ex"),
+						colour = G.C.GREEN,
+					})
 				end
 
 				return nil, true

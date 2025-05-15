@@ -18,7 +18,7 @@ local eds = {
 	"universe",
 	"vaporwave",
 	"voronoi",
-	"wavy"
+	"wavy",
 }
 
 for _, v in pairs(eds) do

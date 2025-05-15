@@ -68,20 +68,41 @@ SMODS.Atlas({
 	path = "planets.png",
 })
 
-SMODS.Atlas {
+SMODS.Atlas({
 	key = "chrisrockatlas",
 	px = 16,
 	py = 16,
 	path = "chrisrock.png",
 	frames = 1,
-	atlas_table = "ANIMATION_ATLAS"
-}
+	atlas_table = "ANIMATION_ATLAS",
+})
 
-SMODS.Atlas {
+SMODS.Atlas({
 	key = "willsmithatlas",
 	px = 32,
 	py = 32,
 	path = "willsmith.png",
 	frames = 1,
-	atlas_table = "ANIMATION_ATLAS"
+	atlas_table = "ANIMATION_ATLAS",
+})
+
+SMODS.Atlas {
+	key = "pirate_ships",
+	px = 35,
+	py = 48,
+	path = "pirate_ships.png"
+}
+
+SMODS.Atlas {
+	key = "modicon",
+	px = 16,
+	py = 16,
+	path = "bearo_icon.png"
+}
+
+SMODS.Atlas {
+	key = "natsurianim",
+	px = 71,
+	py = 95,
+	path = "natsuri.png"
 }

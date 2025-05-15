@@ -18,6 +18,7 @@ return {
 			k_fleeting = "Fleeting.",
 			k_defiant = "Defiant.",
 			k_strawhat = "Straw Hat Pirate",
+			-- k_watchin = "Watching",
 			k_bad = "just bad.",
 		},
 		dictionary = {
@@ -31,6 +32,7 @@ return {
 			k_strawhat = "Straw Hat Pirate",
 			k_fleeting = "Fleeting.",
 			k_defiant = "Defiant.",
+			-- k_watchin = "Watching",
 			k_bad = "just bad.",
 
 			-- Mugiwara messages

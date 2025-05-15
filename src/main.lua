@@ -3,6 +3,7 @@
 BEARO = {}
 BEARO.defeated_will_smith = false
 BEARO.has_stop = false
+BEARO.glass_stained = false
 G.bearo_colour = "GREEN"
 --- @type (table | Mod)?
 BEARO.MOD = SMODS.current_mod
@@ -12,12 +13,12 @@ BEARO.MOD.optional_features = {
 
 SMODS.load_file("src/lib/utils.lua")()
 SMODS.load_file("src/lib/atlas.lua")()
-SMODS.load_file("src/lib/modifiers.lua")()
+SMODS.load_file("src/lib/pirate_ship.lua")()
+SMODS.load_file("src/overrides/force_popup.lua")()
 if (SMODS.Mods["DebugPlus"] or {}).can_load then
 	SMODS.load_file("src/lib/debug_plus.lua")()
 end
 
---- @type function
 local incl = BEARO.UTILS.include_content
 
 -- Rarities
@@ -25,11 +26,17 @@ incl("insolent", "rarities")
 --incl("defiant", "rarities")
 incl("straw_hat", "rarities")
 
+-- Pirate Ships
+incl("going_merry", "pirate_ships")
+incl("thousand_sunny", "pirate_ships")
+
 -- Jokers
 incl("woah_joker", "jokers") -- Common
 incl("eternalinator", "jokers") -- Uncommon
 incl("boobs", "jokers") -- Uncommon
 incl("probablynot", "jokers") -- Uncommon
+incl("the_watcher", "jokers")
+incl("stained_glass", "jokers")
 incl("fingertips", "jokers") -- Rare
 incl("garry", "jokers") -- Rare
 incl("heart_stop", "jokers") -- Rare
@@ -39,14 +46,19 @@ incl("timetostop", "jokers") -- Insolent
 incl("samlaskey", "jokers") -- Insolent
 incl("metroman", "jokers") -- Insolent
 incl("probably", "jokers") -- Insolent
+incl("the_italian", "jokers")
+incl("pizza", "jokers")
+incl("natsuri", "jokers")
 incl("mugiwara", "jokers") -- Straw Hat
 incl("nami", "jokers") -- Straw Hat
 incl("franky", "jokers") -- Straw Hat
 incl("brook", "jokers") -- Straw Hat
+incl("edition_jokers", "jokers")
 
 -- Enhancements
 incl("woah", "enhancements")
 incl("legendary", "enhancements")
+incl("unoriginal", "enhancements")
 
 -- Consumables
 incl("electrified_bath", "consumables")
@@ -55,6 +67,8 @@ incl("wulz", "consumables")
 incl("the_flower", "consumables")
 incl("supernova", "consumables")
 incl("tiler", "consumables")
+incl("borealis", "consumables")
+incl("nullptr", "consumables")
 
 -- Editions
 incl("lesbian", "editions")
@@ -100,6 +114,7 @@ incl("more_contexts", "tweaks")
 
 -- Poker Hands
 incl("three_pair", "poker_hands")
+incl("aaaaaa", "poker_hands")
 
 -- Achievements
 incl("boob_achievements", "achievements")
@@ -176,6 +191,11 @@ SMODS.current_mod.config_tab = function()
 						label = "Enable Woah SFX",
 						ref_table = BEARO.MOD.config,
 						ref_value = "woah_sfx",
+					}),
+					create_toggle({
+						label = "Force Tooltips on Selected",
+						ref_table = BEARO.MOD.config,
+						ref_value = "force_tooltips",
 					}),
 				},
 			},

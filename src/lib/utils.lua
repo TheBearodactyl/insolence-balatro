@@ -1,11 +1,12 @@
 local utf8 = require("utf8")
+local ffi = require("ffi")
 
 --- @diagnostic disable: duplicate-set-field
 
 BEARO.UTILS = {}
 BEARO.UTILS.H = {}
 
---- @alias include_type
+--- @alias inclty
 --- | "achievements" # An Achievement
 --- | "consumables"  # A Consumable
 --- | "deck"         # A Deck
@@ -17,9 +18,10 @@ BEARO.UTILS.H = {}
 --- | "stakes"       # A Stake
 --- | "poker_hands"  # A Poker Hand
 --- | "blinds"       # A Blind
+--- | "pirate_ships" # A Pirate Ship
 
 --- @param name string
---- @param type include_type
+--- @param type inclty
 BEARO.UTILS.include_content = function(name, type)
 	SMODS.load_file("src/content/" .. type .. "/" .. name .. ".lua")()
 end
@@ -31,6 +33,56 @@ end
 --- @param path string
 BEARO.UTILS.include = function(path)
 	SMODS.load_file(path)()
+end
+BEARO.UTILS.word_to_color = function(word)
+	if type(word) ~= "string" then
+		error("Input must be a string")
+	end
+
+	local hex_components = {}
+
+	for i = 1, #word do
+		local ascii_val = string.byte(word, i)
+		local hex_value = string.format("%02x", ascii_val)
+
+		table.insert(hex_components, hex_value:sub(1, 1))
+	end
+
+	while #hex_components < 3 do
+		table.insert(hex_components, hex_components[#hex_components])
+	end
+
+	local hex_color = table.concat(hex_components)
+
+	return hex_color
+end
+
+BEARO.UTILS.rand_mem_addr = function()
+	local sixtyfour_bit = false
+
+	pcall(function()
+		sixtyfour_bit = ffi.abi("64bit")
+	end)
+
+	local hex_digits = sixtyfour_bit and 16 or 8
+	local addr_parts = {}
+
+	for i = 1, hex_digits do
+		local rand_value = math.random(0, 15)
+		addr_parts[i] = string.format("%X", rand_value)
+	end
+
+	local addr = "0x" .. table.concat(addr_parts)
+
+	return addr
+end
+
+--- @param card Card
+--- @param shader string
+BEARO.UTILS.editionless_shader = function(card, shader)
+	if card.config.center.discovered or card.bypass_discovery_center then
+		card.children.center:draw_shader("bearo_" .. shader, nil, card.ARGS.send_to_shader)
+	end
 end
 
 --- @param tbl table
@@ -881,6 +933,61 @@ function BEARO.UTILS.H.le(x)
 	return function(y)
 		return y <= x
 	end
+end
+
+--- @param key string
+--- @return boolean
+BEARO.UTILS.is_pirate_ship = function(key)
+	for _, v in ipairs(BEARO.ENABLED_PIRATE_SHIPS) do
+		if "bearo_" .. v == key then
+			return true
+		end
+	end
+
+	return false
+end
+
+BEARO.UTILS.unorig_cent = function()
+	return G.P_CENTERS["m_bearo_unoriginal_art"]
+end
+
+--- @alias locale
+--- | "de"
+--- | "en-us"
+--- | "es_419"
+--- | "es_ES"
+--- | "fr"
+--- | "id"
+--- | "it"
+--- | "ja"
+--- | "ko"
+--- | "nl"
+--- | "pl"
+--- | "pt_BR"
+--- | "ru"
+--- | "zh_CN"
+--- | "zh_TW"
+
+--- @param language locale
+--- @param link string
+BEARO.UTILS.localize_shader = function(language, link)
+	return BEARO.UTILS.match(language, {
+		["de"] = "Schattierung: " .. link,
+		["en-us"] = "Shader: " .. link,
+		["es_419"] = "Shadér: " .. link,
+		["es_ES"] = "Shader: " .. link,
+		["fr"] = "Shader: " .. link,
+		["id"] = "Shade: " .. link,
+		["it"] = "Shaders: " .. link,
+		["ko"] = "셔더: " .. link,
+		["ja"] = "シェーダー: " .. link,
+		["nl"] = "Shader: " .. link,
+		["pl"] = "Szlachetny: " .. link,
+		["pt_BR"] = "Efeito: " .. link,
+		["ru"] = "Шейдер: " .. link,
+		["zh_CN"] = "着色器: " .. link,
+		["zh_TW"] = "陰影: " .. link
+	})
 end
 
 _ = BEARO.UTILS.H._

@@ -1,27 +1,26 @@
 SMODS.Consumable({
-	key = "tiler",
+	key = "the_borealis",
 	atlas = "consumables",
-	pos = {
-		x = 6,
-		y = 0,
-	},
+	pos = { x = 7, y = 0 },
+	config = {},
+	cost = 5,
+	unlocked = true,
+	discovered = true,
+	hidden = true,
+	soul_set = "Tarot",
+	soul_rate = 0.05,
 	set = "Spectral",
+	order = 14,
 	loc_txt = {
 		["en-us"] = {
-			name = "The Tiler",
+			name = "The Borealis",
 			text = {
-				"Adds the {C:attention}Tiled{} edition",
-				"to {C:attention}One{} selected {C:attention}Playing Card",
+				"Adds {C:attention}Aurora{} to {C:green}1{} selected {C:attention}playing card{}",
 			},
 		},
 	},
-	cost = 3,
-	order = 14,
 	can_use = function(self, card)
 		return (#G.hand.highlighted == 1)
-	end,
-	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue + 1] = G.P_CENTERS["e_bearo_tiled_ed"]
 	end,
 	use = function(self, card, area, copier)
 		local used_consumable = copier or card
@@ -71,7 +70,7 @@ SMODS.Consumable({
 			func = function()
 				local one_edition = selected_card.edition
 				selected_card:flip()
-				selected_card:set_edition({ bearo_tiled_ed = true })
+				selected_card:set_edition({ bearo_aurora_ed = true })
 
 				play_sound("card1", percent)
 

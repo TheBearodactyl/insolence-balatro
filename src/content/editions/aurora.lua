@@ -7,7 +7,10 @@ SMODS.Edition({
 	key = "aurora_ed",
 	shader = "aurora",
 	config = {
-		extra = 1.05,
+		extra = {
+			ee_mult = 1.1,
+			trigger = nil, -- thanks cryptid
+		},
 	},
 	loc_txt = {
 		["en-us"] = {
@@ -21,21 +24,28 @@ SMODS.Edition({
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
-				self.config.extra,
+				self.config.extra.ee_mult,
 			},
 		}
 	end,
 	calculate = function(self, card, context)
-		if context.cardarea == G.play and context.main_scoring then
+		if
+			(context.edition and context.cardarea == G.jokers and self.config.extra.trigger)
+			or (context.main_scoring and context.cardarea == G.play)
+		then
 			return {
-				eemult = self.config.extra,
+				ee_mult = self.config.extra.ee_mult,
+				card = card,
+				message = "Starry...",
 			}
 		end
 
-		if context.cardarea == G.jokers and context.joker_main then
-			return {
-				eemult = self.config.extra,
-			}
+		if context.joker_main then
+			self.config.extra.trigger = true
+		end
+
+		if context.after then
+			self.config.extra.trigger = nil
 		end
 	end,
 })

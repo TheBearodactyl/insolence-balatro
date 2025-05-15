@@ -82,5 +82,5 @@ SMODS.Edition({
 		if context.after then
 			self.config.extra.trigger = nil
 		end
-	end
+	end,
 })
