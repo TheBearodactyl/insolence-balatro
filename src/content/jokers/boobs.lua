@@ -13,7 +13,7 @@ local function boobs_loc(ed_key)
 		["e_bearo_bisexual_ed"] = "A BI",
 		["e_bearo_bocchi_ed"] = "A ROCKIN'",
 		["e_bearo_bubbly_ed"] = "A BUBBLY",
-		["e_bearo_bugged_ed"] = "A " .. BEARO.UTILS.random_str(9),
+		["e_bearo_bugged_ed"] = "A " .. insolib.random_str(9),
 		["e_bearo_cellular_ed"] = "A SINGLE CELL",
 		["e_bearo_printerink_ed"] = "A NON-CONSUMER FRIENDLY",
 		["e_bearo_edgy_ed"] = "an edgy......",
@@ -33,7 +33,7 @@ SMODS.Joker({
 	key = "boobs",
 	atlas = "jokers",
 	pos = { x = 12, y = 0 },
-	soul_pos = BEARO.UTILS.boobs_sprite(BEARO.MOD),
+	soul_pos = insolib.boobs_sprite(BEARO.MOD),
 	order = 70,
 	config = {
 		extra = {

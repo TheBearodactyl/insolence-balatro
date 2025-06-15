@@ -1,8 +1,22 @@
 local lovely = require("lovely")
 ---@diagnostic disable: duplicate-set-field
 
+local ffi = require("ffi")
+local lovely = require("lovely")
+
+local libexts = {
+	"dll",
+	"so",
+	"dylib"
+}
+
+for _, ext in ipairs(libexts) do
+	package.cpath = package.cpath .. ";" .. lovely.mod_dir .. "/Insolence/lib/?." .. ext
+end
+
+insolib = require("insolence")
+
 BEARO = {}
-BEARO.defeated_will_smith = false
 BEARO.has_stop = false
 BEARO.glass_stained = false
 G.bearo_colour = "GREEN"
@@ -43,7 +57,7 @@ incl("garry", "jokers") -- Rare
 incl("heart_stop", "jokers") -- Rare
 incl("the_sun", "jokers") -- Legendary
 incl("rotoscoped", "jokers") -- Insolent
-incl("timetostop", "jokers") -- Insolent
+--incl("timetostop", "jokers") -- disabled until i can bugfix
 incl("samlaskey", "jokers") -- Insolent
 incl("metroman", "jokers") -- Insolent
 incl("probably", "jokers") -- Insolent
@@ -259,3 +273,5 @@ SMODS.current_mod.config_tab = function()
 		},
 	}
 end
+
+print("AAAAAAAAAAAAAAAAAAAAAAAAAAAa " .. lovely.mod_dir)

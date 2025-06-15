@@ -28,14 +28,14 @@ for _, v in pairs(eds) do
 	SMODS.Back({
 		key = deck_key,
 		atlas = "jokers",
-		pos = BEARO.UTILS.placeholder_sprite(),
+		pos = insolib.placeholder_sprite(),
 		discovered = true,
 		loc_txt = {
 			["en-us"] = {
-				name = BEARO.UTILS.capitalize(v) .. " Deck",
+				name = insolib.capitalize(v) .. " Deck",
 				text = {
 					"A deck made up entirely of",
-					BEARO.UTILS.capitalize(v) .. " cards",
+					insolib.capitalize(v) .. " cards",
 				},
 			},
 		},

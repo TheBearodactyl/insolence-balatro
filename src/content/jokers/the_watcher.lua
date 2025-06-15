@@ -1,6 +1,6 @@
 SMODS.Rarity({
 	key = "watchin",
-	badge_colour = HEX(BEARO.UTILS.word_to_color("watching")),
+	badge_colour = HEX(insolib.word_to_color("watching")),
 	loc_txt = {
 		["en-us"] = {
 			name = "Watching",

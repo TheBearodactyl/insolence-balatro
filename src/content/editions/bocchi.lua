@@ -33,7 +33,7 @@ SMODS.Edition({
 	disable_base_shader = true,
 	calculate = function(self, card, context)
 		if context.cardarea == G.play and #context.scoring_hand == 1 and context.before then
-			if BEARO.UTILS.chance(self.config.extra.percent_chance) == true then
+			if insolib.chance(self.config.extra.percent_chance) == true then
 				G.E_MANAGER:add_event(Event({
 					func = function()
 						local stone_joker = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_stone", nil)

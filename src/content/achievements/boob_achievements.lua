@@ -1,7 +1,7 @@
 SMODS.Achievement({
 	key = "grow_boobs",
 	atlas = "jokers",
-	pos = BEARO.UTILS.boobs_sprite(BEARO.MOD),
+	pos = insolib.boobs_sprite(BEARO.MOD),
 	order = 6,
 	loc_txt = {
 		["en-us"] = {

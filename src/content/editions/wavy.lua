@@ -29,7 +29,7 @@ SMODS.Edition({
 	},
 	calculate = function(self, card, context)
 		if context.setting_blind then
-			local new_mult = BEARO.UTILS.wave_number(self.config.extra.mult)
+			local new_mult = insolib.wave_number(self.config.extra.mult)
 			self.config.extra.mult = new_mult
 		end
 	end,

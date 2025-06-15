@@ -14,7 +14,7 @@ SMODS.PokerHand({
 	atlas = "jokers",
 	above_hand = "Flush Five",
 	visible = true,
-	pos = BEARO.UTILS.placeholder_sprite(),
+	pos = insolib.placeholder_sprite(),
 	example = {
 		{ "H_A", true },
 		{ "D_A", true },
@@ -61,7 +61,7 @@ SMODS.PokerHand({
 	atlas = "jokers",
 	above_hand = "AAAAAA",
 	visible = true,
-	pos = BEARO.UTILS.placeholder_sprite(),
+	pos = insolib.placeholder_sprite(),
 	example = {
 		{ "D_A", true },
 		{ "D_A", true },

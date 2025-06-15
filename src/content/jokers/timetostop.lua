@@ -22,6 +22,8 @@ SMODS.Joker({
 		end
 	end,
 	add_to_deck = function(self, card, from_debuff)
+		BEARO.has_stop = true
+
 		G.FUNCS.can_play = function(e)
 			if G.GAME.current_round.hands_left <= 0 then
 				e.config.colour = G.C.UI.BACKGROUND_INACTIVE

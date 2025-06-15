@@ -26,7 +26,7 @@ BEARO.legendary_enh = SMODS.Enhancement({
 	end,
 	calculate = function(self, card, context)
 		if context.cardarea == G.play and context.main_scoring then
-			if BEARO.UTILS.chance(self.config.extra.chance) == true then
+			if insolib.chance(self.config.extra.chance) == true then
 				return {
 					emult = self.config.extra.emult,
 					message = "LEGENDARY",

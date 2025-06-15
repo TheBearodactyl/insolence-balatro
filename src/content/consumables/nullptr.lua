@@ -13,11 +13,11 @@ SMODS.Consumable({
 			name = "nullptr",
 			text = {
 				"Exception thrown at {C:attention}"
-					.. BEARO.UTILS.rand_mem_addr()
+					.. insolib.rand_mem_addr()
 					.. "{} in Balatro.exe: {C:attention}"
-					.. BEARO.UTILS.rand_mem_addr()
+					.. insolib.rand_mem_addr()
 					.. "{}: Access violation reading {C:attention}"
-					.. BEARO.UTILS.rand_mem_addr()
+					.. insolib.rand_mem_addr()
 					.. "{}.",
 			},
 		},

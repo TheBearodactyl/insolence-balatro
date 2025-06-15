@@ -21,7 +21,7 @@ local editions = {
 
 for k, v in pairs(editions) do
 	SMODS.Joker({
-		name = BEARO.UTILS.capitalize(v),
+		name = insolib.capitalize(v),
 		key = v .. "_joker",
 		atlas = "jokers",
 		rarity = 3,
@@ -31,9 +31,9 @@ for k, v in pairs(editions) do
 		},
 		loc_txt = {
 			["en-us"] = {
-				name = BEARO.UTILS.capitalize(v),
+				name = insolib.capitalize(v),
 				text = {
-					"A " .. BEARO.UTILS.capitalize(v) .. " Joker!",
+					"A " .. insolib.capitalize(v) .. " Joker!",
 				},
 			},
 		},

@@ -1,4 +1,5 @@
 SMODS.Blind({
+	name = "Will Smith",
 	key = "willsmith",
 	atlas = "willsmithatlas",
 	pos = {
@@ -8,19 +9,17 @@ SMODS.Blind({
 	boss = {
 		showdown = true,
 	},
-	mult = 20,
+	mult = 30,
+	dollars = 10,
 	boss_colour = G.C.RED,
 	loc_txt = {
 		["en-us"] = {
 			name = "Will Smith",
 			text = {
-				"Extremely Large Blind",
+				"Unfathomably Large Blind",
 				" ",
 				"Disables the Chris Rock boss blind",
 			},
 		},
-	},
-	defeat = function(self)
-		BEARO.defeated_will_smith = true
-	end,
+	}
 })

@@ -3,7 +3,7 @@ local g_up = Game.update
 local bearo_roto_dt = 0
 local bearo_metro_dt = 0
 local bearo_garry_dt = 0
-local bearo_stop_dt = 0
+-- local bearo_stop_dt = 0
 local bearo_natsuri_dt = 0
 function Game:update(dt)
 	g_up(self, dt)
@@ -13,7 +13,7 @@ function Game:update(dt)
 	bearo_roto_dt = bearo_roto_dt + dt
 	bearo_metro_dt = bearo_metro_dt + dt
 	bearo_garry_dt = bearo_garry_dt + dt
-	bearo_stop_dt = bearo_stop_dt + dt
+	-- bearo_stop_dt = bearo_stop_dt + dt
 	bearo_natsuri_dt = bearo_natsuri_dt + dt
 
 	if G.P_CENTERS and G.P_CENTERS.j_bearo_roto and bearo_roto_dt > 0.1 then
@@ -64,21 +64,21 @@ function Game:update(dt)
 		end
 	end
 
-	if G.P_CENTERS and G.P_CENTERS.j_bearo_filthy and bearo_stop_dt > 0.025 then
-		bearo_stop_dt = 0
+	-- if G.P_CENTERS and G.P_CENTERS.j_bearo_filthy and bearo_stop_dt > 0.025 then
+	-- 	bearo_stop_dt = 0
 
-		local stop_obj = G.P_CENTERS.j_bearo_filthy
+	-- 	local stop_obj = G.P_CENTERS.j_bearo_filthy
 
-		if stop_obj.pos.x == 0 and stop_obj.pos.y == 77 then
-			stop_obj.pos.x = 0
-			stop_obj.pos.y = 0
-		elseif stop_obj.pos.x < 9 then
-			stop_obj.pos.x = stop_obj.pos.x + 1
-		elseif stop_obj.pos.y < 77 then
-			stop_obj.pos.x = 0
-			stop_obj.pos.y = stop_obj.pos.y + 1
-		end
-	end
+	-- 	if stop_obj.pos.x == 0 and stop_obj.pos.y == 77 then
+	-- 		stop_obj.pos.x = 0
+	-- 		stop_obj.pos.y = 0
+	-- 	elseif stop_obj.pos.x < 9 then
+	-- 		stop_obj.pos.x = stop_obj.pos.x + 1
+	-- 	elseif stop_obj.pos.y < 77 then
+	-- 		stop_obj.pos.x = 0
+	-- 		stop_obj.pos.y = stop_obj.pos.y + 1
+	-- 	end
+	-- end
 
 	if G.P_CENTERS and G.P_CENTERS["j_bearo_natsuri"] and bearo_natsuri_dt > 0.5 then
 		bearo_natsuri_dt = 0

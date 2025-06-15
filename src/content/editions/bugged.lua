@@ -3,7 +3,7 @@ SMODS.Shader({
 	path = "bugged.fs",
 })
 
-local bugged_gradient = BEARO.UTILS.create_gradient("bugged_grad", BEARO.UTILS.rand_table_of_hex_codes(5))
+local bugged_gradient = BEARO.UTILS.create_gradient("bugged_grad", insolib.rand_table_of_hex_codes(5))
 
 local function bugged_calc()
 	local rand_num = math.random() * 20 - 10 -- Between -10 and 10
@@ -55,7 +55,7 @@ SMODS.Edition({
 	loc_txt = {
 		["en-us"] = {
 			name = "Bugged",
-			label = BEARO.UTILS.random_str(12),
+			label = insolib.random_str(12),
 			text = { "{C:mult}+#1#{} Mult", "{C:chips}+#2#{} Chips", "{C:mult}X#3#{} Mult" },
 		},
 	},

@@ -15,7 +15,7 @@ SMODS.PokerHand({
 	l_chips = 40,
 	atlas = "jokers",
 	visible = false,
-	pos = BEARO.UTILS.placeholder_sprite(),
+	pos = insolib.placeholder_sprite(),
 	example = {
 		{ "S_A", true },
 		{ "H_A", true },

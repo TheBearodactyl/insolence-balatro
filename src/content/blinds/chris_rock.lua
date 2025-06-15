@@ -20,10 +20,14 @@ SMODS.Blind({
 		},
 	},
 	debuff_hand = function(self, cards, hand, handname, check)
-		if BEARO.defeated_will_smith then
-			return false
-		else
-			return true
+		for k, _ in pairs(G.GAME.defeated_blinds) do
+			s = G.P_BLINDS[k]
+
+			if s.name == "Will Smith" then
+				return true
+			else
+				return false
+			end
 		end
 	end,
 })
