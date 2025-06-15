@@ -1,0 +1,30 @@
+--- @class InsolenceLib
+--- @field between fun(num: number, min: number, max: number): boolean
+--- @field largest_val fun(tbl: table): any?
+--- @field average_table_amt fun(tbl: table): number
+--- @field reverse_table fun(tbl: table): table
+--- @field capitalize fun(word: string?): string | nil
+--- @field every_day_im_shufflin fun(tbl: table): table
+--- @field rand_mem_addr fun(): string
+--- @field placeholder_sprite fun(): table
+--- @field within fun(x: number, y: number): boolean
+--- @field random_str fun(len: number, char_set?: string): string
+--- @field hex fun(hex: string): table
+--- @field rand_hex_code fun(): table
+--- @field rand_int fun(min: integer, max: integer): integer
+--- @field rand_num fun(min: number, max: number): number
+--- @field random_table_of_strs fun(str_len: number, tbl_len: number): table
+--- @field rand_table_of_hex_codes fun(len: number): table
+--- @field mod_vals fun(input: number | table, modifier: number): number | table
+--- @field wave_number fun(num: number): number
+--- @field clamp fun(num: number, min: number, max: number): number
+--- @field chance fun(percent_chance: number): boolean
+--- @field exponentiate fun(base: number, power: number): number
+--- @field boobs_sprite fun(mod_cfg: table): table
+--- @field include_content fun(name: string, ty: string): nil
+--- @field include fun(path: string): nil
+--- @field word_to_color fun(word: string): string
+--- @field random_joker fun(seed?: string, excluded_flags?: table, banned_card?: string, pool?: table, no_undiscovered?: boolean): table
+--- @field is_rigged_cryptid fun(card: table): boolean
+--- @field mod_cond fun(mod_id: string, if_exists: any, otherwise: any): any
+--- @field count_num_of_joker fun(prefix: string, key: string): integer
