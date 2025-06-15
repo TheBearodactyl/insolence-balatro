@@ -35,9 +35,11 @@ end
 --- @field mod_cond fun(mod_id: string, if_exists: any, otherwise: any): any
 --- @field count_num_of_joker fun(prefix: string, key: string): integer
 --- @field register_items fun(items: string[], path: string)
+--- @field create_gradient fun(key: string, colors: string[]): SMODS.Gradient
 libinsolence = require("libinsolence")
 
 -- # Load Mod Content # --
-libinsolence.register_items(insolence.content.rarities, "src/content/rarities/")
-libinsolence.register_items(insolence.content.editions, "src/content/editions/")
-libinsolence.register_items(insolence.content.jokers, "src/content/jokers/")
+libinsolence.register_items(insolence.content.rarities, "src/content/rarities")
+libinsolence.register_items(insolence.content.editions, "src/content/editions")
+libinsolence.register_items(insolence.content.consumables, "src/content/consumables")
+libinsolence.register_items(insolence.content.jokers, "src/content/jokers")

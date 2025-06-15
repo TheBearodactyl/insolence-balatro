@@ -14,7 +14,7 @@ name = "bearo.utils"
 target = "engine/sprite.lua"
 pattern = '''G.SHADERS[_shader or 'dissolve']:send("time",123.33412*(_draw_major.ID/1.14212 or 12.5123152)%3000)'''
 position = "at"
-payload = '''G.SHADERS[_shader or 'dissolve']:send("time", G.TIMERS.REAL)'''
+payload = '''G.SHADERS[_shader or 'dissolve']:send("time", G.SETTINGS.reduced_motion and (123.33412 * (_draw_major.ID / 1.14212 or 12.5123152) % 3000) or G.TIMERS.REAL)'''
 match_indent = true
 
 [[patches]]

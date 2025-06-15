@@ -14,7 +14,21 @@ insolence = {
             "insolent"
         },
         editions = {
-            "lesbian"
+            "ace",
+            "aurora",
+            "bisexual",
+            "bugged",
+            "cellular",
+            "edgy",
+            "gay",
+            "lesbian",
+            "pinku",
+            "tiled"
+        },
+        consumables = {
+            "borealis",
+            "nullptr",
+            "soup"
         }
     },
     mod = SMODS.current_mod

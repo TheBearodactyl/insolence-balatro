@@ -28,3 +28,4 @@
 --- @field is_rigged_cryptid fun(card: table): boolean
 --- @field mod_cond fun(mod_id: string, if_exists: any, otherwise: any): any
 --- @field count_num_of_joker fun(prefix: string, key: string): integer
+--- @field register_items fun(items: string[], path: string)
