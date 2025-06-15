@@ -23,7 +23,8 @@ insolence = {
             "gay",
             "lesbian",
             "pinku",
-            "tiled"
+            "tiled",
+            "universe"
         },
         consumables = {
             "borealis",
