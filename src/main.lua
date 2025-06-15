@@ -1,4 +1,4 @@
-local lovely = require "lovely"
+local lovely = require("lovely")
 ---@diagnostic disable: duplicate-set-field
 
 BEARO = {}
@@ -22,25 +22,6 @@ end
 
 local incl = BEARO.UTILS.include_content
 
-local function find_insolence_directory(dir)
-	for _, item in ipairs(NFS.getDirectoryItems(dir)) do
-		local item_path = dir .. "/" .. item
-
-		if
-			NFS.getInfo(item_path, "directory")
-			and string.lower(item):find("insolence")
-		then
-			return item_path
-		end
-	end
-
-	return ""
-end
-
-BEARO.path = find_insolence_directory(lovely.mod_dir)
-
-bearutil = package.loadlib(BEARO.path .. "/insolencelib.dll", "luaopen_insolencelib")()
-
 -- Rarities
 incl("insolent", "rarities")
 --incl("defiant", "rarities")
@@ -51,28 +32,28 @@ incl("going_merry", "pirate_ships")
 incl("thousand_sunny", "pirate_ships")
 
 -- Jokers
-incl("woah_joker", "jokers")    -- Common
+incl("woah_joker", "jokers") -- Common
 incl("eternalinator", "jokers") -- Uncommon
-incl("boobs", "jokers")         -- Uncommon
-incl("probablynot", "jokers")   -- Uncommon
+incl("boobs", "jokers") -- Uncommon
+incl("probablynot", "jokers") -- Uncommon
 incl("the_watcher", "jokers")
 incl("stained_glass", "jokers")
 incl("fingertips", "jokers") -- Rare
-incl("garry", "jokers")      -- Rare
+incl("garry", "jokers") -- Rare
 incl("heart_stop", "jokers") -- Rare
-incl("the_sun", "jokers")    -- Legendary
+incl("the_sun", "jokers") -- Legendary
 incl("rotoscoped", "jokers") -- Insolent
 incl("timetostop", "jokers") -- Insolent
-incl("samlaskey", "jokers")  -- Insolent
-incl("metroman", "jokers")   -- Insolent
-incl("probably", "jokers")   -- Insolent
+incl("samlaskey", "jokers") -- Insolent
+incl("metroman", "jokers") -- Insolent
+incl("probably", "jokers") -- Insolent
 incl("the_italian", "jokers")
 incl("pizza", "jokers")
 incl("natsuri", "jokers")
 incl("mugiwara", "jokers") -- Straw Hat
-incl("nami", "jokers")     -- Straw Hat
-incl("franky", "jokers")   -- Straw Hat
-incl("brook", "jokers")    -- Straw Hat
+incl("nami", "jokers") -- Straw Hat
+incl("franky", "jokers") -- Straw Hat
+incl("brook", "jokers") -- Straw Hat
 incl("edition_jokers", "jokers")
 
 -- Enhancements
