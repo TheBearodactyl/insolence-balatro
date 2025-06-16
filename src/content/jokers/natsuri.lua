@@ -31,6 +31,22 @@ SMODS.Joker {
             }
         }
     end,
+    in_pool = function (self, args)
+        local num_of_lesbian_cards = 0
+
+        if G.deck then
+            for k, v in pairs(G.deck.cards) do
+                --- @type Card
+                v = v
+
+                if v.edition and v.edition.key == "e_ins_lesbian_ed" then
+                    num_of_lesbian_cards = num_of_lesbian_cards + 1
+                end
+            end
+        end
+
+        return num_of_lesbian_cards >= 2
+    end,
     calculate = function(self, card, context)
         if
             context.other_joker

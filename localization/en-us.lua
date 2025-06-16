@@ -42,7 +42,9 @@ return {
 			k_gumgumkonggun_ex = "Gomu Gomu no... KONG GUN", -- Gear 4
 			k_gumgumdawnwhip_ex = "Gomu Gomu no... DAWN WHIP", -- Gear 5
 
-			bearo_music_options = {
+			insolence_ui_shaders = "Shaders",
+
+			insolence_music_options = {
 				"Always enabled",
 				"While owned",
 				"Shortly on bought",
@@ -50,7 +52,7 @@ return {
 				"Disabled",
 			},
 
-			bearo_laskey_music_options = {
+			insolence_laskey_music_options = {
 				"Always enabled",
 				"While owned",
 				"Shortly on bought",
@@ -58,12 +60,12 @@ return {
 				"Disabled",
 			},
 
-			bearo_music_description = {
+			insolence_music_description = {
 				"When to play Mugiwara music",
 				"(rights owned by Toei Animation)",
 			},
 
-			bearo_laskey_music_description = {
+			insolence_laskey_music_description = {
 				"When to play Sam Laskey music",
 				"(rights owned by Sam Laskey)",
 			},

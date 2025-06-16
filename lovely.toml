@@ -24,3 +24,39 @@ pattern = '''G.SHADERS[_shader or 'dissolve']:send("mouse_screen_pos",self.ARGS.
 position = "at"
 payload = '''G.SHADERS[_shader or 'dissolve']:send("mouse_screen_pos", love.mouse.getPosition())'''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "SC = Card(G.ROOM.T.w/2 - SC_scale*G.CARD_W/2, 10. + G.ROOM.T.h/2 - SC_scale*G.CARD_H/2, SC_scale*G.CARD_W, SC_scale*G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_joker'])"
+position = "after"
+payload = '''
+SC = Card(G.ROOM.T.w/2 - SC_scale*G.CARD_W/2, 10. + G.ROOM.T.h/2 - SC_scale*G.CARD_H/2, (SC_scale*G.CARD_W), (SC_scale*G.CARD_H), G.P_CARDS.empty, G.P_CENTERS['j_ins_fingertips'],{bypass_discovery_center = true, bypass_discovery_ui = true})
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "{card_limit = self.GAME.starting_params.consumable_slots, type = 'joker', highlight_limit = 1})"
+position = "at"
+payload = "{card_limit = self.GAME.starting_params.consumable_slots, type = 'joker', highlight_limit = 1e100})"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "{card_limit = self.GAME.starting_params.joker_slots, type = 'joker', highlight_limit = 1})"
+position = "at"
+payload = "{card_limit = self.GAME.starting_params.joker_slots, type = 'joker', highlight_limit = 1e100})"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "if math.random() > 0.8 then card.sprite_facing = 'back'; card.facing = 'back' end"
+position = "before"
+payload = '''
+if libinsolence.random_joker then card:set_ability(libinsolence.random_joker('ins_splash', {}, nil, nil, true), true, nil) end
+'''
+match_indent = true

@@ -3,7 +3,6 @@ import os
 
 
 def download_latest_release_assets(owner, repo, download_dir="."):
-    # GitHub API URL for latest release
     url = f"https://api.github.com/repos/{owner}/{repo}/releases/latest"
 
     response = requests.get(url)
@@ -35,7 +34,6 @@ def download_latest_release_assets(owner, repo, download_dir="."):
 
 
 if __name__ == "__main__":
-    # Replace 'owner' and 'repo' with the target repository details
     owner = "thebearodactyl"
     repo = "insolence-lib"
     download_latest_release_assets(owner, repo, download_dir="./lib")

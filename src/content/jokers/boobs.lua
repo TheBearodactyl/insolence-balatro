@@ -20,7 +20,7 @@ SMODS.Joker {
             }
         }
     },
-    loc_vars = function (self, info_queue, card)
+    loc_vars = function(self, info_queue, card)
         return {
             vars = {
                 card.ability.extra.chips
@@ -44,3 +44,16 @@ SMODS.Joker {
         end
     end
 }
+
+local orig_gup = Game.update
+function Game:update(dt)
+    orig_gup(self, dt)
+
+    if G.P_CENTERS and G.P_CENTERS.j_ins_boobs then
+        if insolence.mod.config and insolence.mod.config.adult_mode == true then
+            G.P_CENTERS.j_ins_boobs.soul_pos = { x = 10000000, y = 100000000 }
+        elseif insolence.mod.config.adult_mode == false then
+            G.P_CENTERS.j_ins_boobs.soul_pos = { x = 12, y = 2 }
+        end
+    end
+end

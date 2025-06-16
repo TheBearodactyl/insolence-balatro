@@ -28,7 +28,7 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "rotoscoped",
-    px = 35.5,
+    px = 36,
     py = 48,
     path = "roto.png",
 })
