@@ -156,3 +156,5 @@ util.load("src/atlas.lua")
 
 -- Load the mod
 util.load("src/load.lua")
+
+util.load("src/update.lua")

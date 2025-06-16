@@ -183,6 +183,8 @@ local orig_gmm = Game.main_menu
 function Game.main_menu(change_context)
 	local ret = orig_gmm(change_context)
 
+	insolence.update_check()
+
 	local newcard = Card(
 		G.title_top.T.x,
 		G.title_top.T.y,
