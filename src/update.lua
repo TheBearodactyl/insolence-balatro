@@ -1,6 +1,6 @@
 local mod_path = "Mods/Insolence"
 local id = "insolence"
-local subpath = "insolence-balatro-" .. SMODS.Mods[id].version
+local subpath = ""
 
 local function curl_fetch(url)
     local cmd = ('curl -sL "%s"'):format(url:gsub('"', '\\"'))
