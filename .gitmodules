@@ -1,0 +1,3 @@
+[submodule "libinsolence"]
+	path = libinsolence
+	url = https://github.com/TheBearodactyl/insolence-lib
