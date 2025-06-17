@@ -106,3 +106,10 @@ SMODS.Atlas {
     py = 95,
     path = "natsuri.png"
 }
+
+SMODS.Atlas {
+    key = "futurefunkanim",
+    px = 71,
+    py = 95,
+    path = "futurefunk.png"
+}

@@ -42,18 +42,25 @@ SMODS.Joker {
                 card = card
             }
         end
+    end,
+    draw = function(self, card, layer)
+        if insolence.mod.config and insolence.mod.config.adult_mode == true then
+            self.soul_pos = { x = 10000000000, y = 100000000000 }
+        elseif insolence.mod.config.adult_mode == false then
+            self.soul_pos = { x = 12, y = 2 }
+        end
     end
 }
 
-local orig_gup = Game.update
-function Game:update(dt)
-    orig_gup(self, dt)
+-- local orig_gup = Game.update
+-- function Game:update(dt)
+--     orig_gup(self, dt)
 
-    if G.P_CENTERS and G.P_CENTERS.j_ins_boobs then
-        if insolence.mod.config and insolence.mod.config.adult_mode == true then
-            G.P_CENTERS.j_ins_boobs.soul_pos = { x = 10000000, y = 100000000 }
-        elseif insolence.mod.config.adult_mode == false then
-            G.P_CENTERS.j_ins_boobs.soul_pos = { x = 12, y = 2 }
-        end
-    end
-end
+--     if G.P_CENTERS and G.P_CENTERS.j_ins_boobs then
+--         if insolence.mod.config and insolence.mod.config.adult_mode == true then
+--             G.P_CENTERS.j_ins_boobs.soul_pos = { x = 10000000, y = 100000000 }
+--         elseif insolence.mod.config.adult_mode == false then
+--             G.P_CENTERS.j_ins_boobs.soul_pos = { x = 12, y = 2 }
+--         end
+--     end
+-- end
