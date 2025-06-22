@@ -365,7 +365,7 @@ insolence.mod.optional_features = {
 }
 
 ---@diagnostic disable-next-line: unused-local
-local futurefunk_dt, garry_dt, metroman_dt, natsuri_dt, rotoscoped_dt = 0, 0, 0, 0, 0
+local futurefunk_dt, garry_dt, metroman_dt, natsuri_dt, rotoscoped_dt, speedpaint_dt = 0, 0, 0, 0, 0, 0
 local orig_gu = Game.update
 
 function Game:update(dt)
@@ -374,8 +374,8 @@ function Game:update(dt)
 	libinsolence.animate_center(
 		"j_ins_futurefunk", "futurefunk_dt",
 		dt, 0.1,
-		8, 27,
-		100, 27
+		7, 26,
+		99, 26
 	)
 
 	libinsolence.animate_center(
@@ -402,7 +402,14 @@ function Game:update(dt)
 	libinsolence.animate_center(
 		"j_ins_roto", "rotoscoped_dt",
 		dt, 0.1,
-		10, 7,
-		14, 7
+		7, 9,
+		8, 9
+	)
+
+	libinsolence.animate_center(
+		"j_ins_speedpaint", "speedpaint_dt",
+		dt, 0.1,
+		2, 27,
+		19, 27
 	)
 end

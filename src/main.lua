@@ -38,7 +38,8 @@ insolence = {
 			"the_watcher",
 			"wildin",
 			"woah_joker",
-			"future_funk"
+			"future_funk",
+			"speedpaint"
 		},
 		rarities = {
 			"insolent",

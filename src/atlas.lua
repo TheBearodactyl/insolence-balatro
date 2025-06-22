@@ -55,13 +55,6 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
-    key = "legendary",
-    px = math.floor(69 / 2),
-    py = math.floor(93 / 2),
-    path = "strawhat.png",
-})
-
-SMODS.Atlas({
     key = "planets",
     px = 71,
     py = 95,
@@ -112,4 +105,11 @@ SMODS.Atlas {
     px = 71,
     py = 95,
     path = "futurefunk.png"
+}
+
+SMODS.Atlas {
+    key = "speedpaintanim",
+    px = 71,
+    py = 95,
+    path = "speedpaint.png"
 }
