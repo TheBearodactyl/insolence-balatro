@@ -1,4 +1,4 @@
-NOTICE: THIS MOD IS NOWHERE NEAR STABLE OR COMPLETE. USE AT YOUR OWN RISK
+this is what happens when you let a grizzly-bear pterodactyl hybrid write code
 
 - [Insolence Lib](https://github.com/thebearodactyl/insolence-lib)
 
