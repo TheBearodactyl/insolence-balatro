@@ -36,6 +36,7 @@ end
 --- @field count_num_of_joker fun(prefix: string, key: string): integer
 --- @field register_items fun(items: string[], path: string)
 --- @field create_gradient fun(key: string, colors: string[]): SMODS.Gradient
+--- @field animate_center fun(center_id: string, center_dt: string, dt: number, speed: number, target_x: integer, target_y: integer, max_x: integer, max_y: integer)
 libinsolence = require("libinsolence")
 
 for k, _ in pairs(insolence.content) do
@@ -208,10 +209,10 @@ function Game.main_menu(change_context)
 		{
 			shader = "splash",
 			send = {
-				{ name = "time", ref_table = G.TIMERS, ref_value = "REAL_SHADER" },
+				{ name = "time",       ref_table = G.TIMERS, ref_value = "REAL_SHADER" },
 				{ name = "vort_speed", val = 0.4 },
-				{ name = "colour_1", ref_table = G.C, ref_value = "PURPLE" },
-				{ name = "colour_2", ref_table = G.C, ref_value = "PINK" },
+				{ name = "colour_1",   ref_table = G.C,      ref_value = "PURPLE" },
+				{ name = "colour_2",   ref_table = G.C,      ref_value = "PINK" },
 			},
 		},
 	})
@@ -362,3 +363,46 @@ end
 insolence.mod.optional_features = {
 	retrigger_joker = true,
 }
+
+---@diagnostic disable-next-line: unused-local
+local futurefunk_dt, garry_dt, metroman_dt, natsuri_dt, rotoscoped_dt = 0, 0, 0, 0, 0
+local orig_gu = Game.update
+
+function Game:update(dt)
+	orig_gu(self, dt)
+
+	libinsolence.animate_center(
+		"j_ins_futurefunk", "futurefunk_dt",
+		dt, 0.1,
+		8, 27,
+		100, 27
+	)
+
+	libinsolence.animate_center(
+		"j_ins_garry", "garry_dt",
+		dt, 0.1,
+		8, 3,
+		9, 4
+	)
+
+	libinsolence.animate_center(
+		"j_ins_metroman", "metroman_dt",
+		dt, 0.1,
+		10, 7,
+		14, 7
+	)
+
+	libinsolence.animate_center(
+		"j_ins_natsuri", "natsuri_dt",
+		dt, 0.5,
+		3, 1,
+		9, 1
+	)
+
+	libinsolence.animate_center(
+		"j_ins_roto", "rotoscoped_dt",
+		dt, 0.1,
+		10, 7,
+		14, 7
+	)
+end

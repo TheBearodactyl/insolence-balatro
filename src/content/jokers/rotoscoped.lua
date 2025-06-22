@@ -121,28 +121,3 @@ SMODS.Joker({
         end
     end,
 })
-
-local orig_gup = Game.update
-
-local rotoscoped_dt = 0
-function Game:update(dt)
-    orig_gup(self, dt)
-
-    rotoscoped_dt = rotoscoped_dt + dt
-
-    if G.P_CENTERS and G.P_CENTERS.j_ins_roto and rotoscoped_dt > 0.1 then
-        rotoscoped_dt = 0
-
-        local rotoscoped_obj = G.P_CENTERS.j_ins_roto
-
-        if rotoscoped_obj.pos.x == 10 and rotoscoped_obj.pos.y == 7 then
-            rotoscoped_obj.pos.x = 0
-            rotoscoped_obj.pos.y = 0
-        elseif rotoscoped_obj.pos.x < 14 then
-            rotoscoped_obj.pos.x = rotoscoped_obj.pos.x + 1
-        elseif rotoscoped_obj.pos.y < 7 then
-            rotoscoped_obj.pos.x = 0
-            rotoscoped_obj.pos.y = rotoscoped_obj.pos.y + 1
-        end
-    end
-end

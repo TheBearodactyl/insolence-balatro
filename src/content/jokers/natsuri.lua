@@ -71,29 +71,3 @@ SMODS.Joker {
         end
     end
 }
-
-
-local orig_gu = Game.update
-
-local natsuri_dt = 0
-function Game:update(dt)
-    orig_gu(self, dt)
-
-    natsuri_dt = natsuri_dt + dt
-
-    if G.P_CENTERS and G.P_CENTERS["j_ins_natsuri"] and natsuri_dt > 0.5 then
-        natsuri_dt = 0
-
-        local natsuri_obj = G.P_CENTERS["j_ins_natsuri"]
-
-        if natsuri_obj.pos.x == 3 and natsuri_obj.pos.y == 1 then
-            natsuri_obj.pos.x = 0
-            natsuri_obj.pos.y = 0
-        elseif natsuri_obj.pos.x < 9 then
-            natsuri_obj.pos.x = natsuri_obj.pos.x + 1
-        elseif natsuri_obj.pos.y < 1 then
-            natsuri_obj.pos.x = 0
-            natsuri_obj.pos.y = natsuri_obj.pos.y + 1
-        end
-    end
-end

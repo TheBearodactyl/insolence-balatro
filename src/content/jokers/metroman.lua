@@ -52,28 +52,3 @@ SMODS.Joker({
         end
     end,
 })
-
-local orig_gup = Game.update
-
-local metroman_dt = 0
-function Game:update(dt)
-    orig_gup(self, dt)
-
-    metroman_dt = metroman_dt + dt
-
-    if G.P_CENTERS and G.P_CENTERS.j_ins_metroman and metroman_dt > 0.1 then
-        metroman_dt = 0
-
-        local metroman_obj = G.P_CENTERS.j_ins_metroman
-
-        if metroman_obj.pos.x == 10 and metroman_obj.pos.y == 7 then
-            metroman_obj.pos.x = 0
-            metroman_obj.pos.y = 0
-        elseif metroman_obj.pos.x < 14 then
-            metroman_obj.pos.x = metroman_obj.pos.x + 1
-        elseif metroman_obj.pos.y < 7 then
-            metroman_obj.pos.x = 0
-            metroman_obj.pos.y = metroman_obj.pos.y + 1
-        end
-    end
-end

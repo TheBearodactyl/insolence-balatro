@@ -63,28 +63,3 @@ SMODS.Joker {
         end
     end
 }
-
-local orig_gu = Game.update
-
-local futurefunk_dt = 0
-function Game:update(dt)
-    orig_gu(self, dt)
-
-    futurefunk_dt = futurefunk_dt + dt
-
-    if G.P_CENTERS and G.P_CENTERS["j_ins_futurefunk"] and futurefunk_dt > 0.1 then
-        futurefunk_dt = 0
-
-        local futurefunk_obj = G.P_CENTERS["j_ins_futurefunk"]
-
-        if futurefunk_obj.pos.x == 8 and futurefunk_obj.pos.y == 27 then
-            futurefunk_obj.pos.x = 0
-            futurefunk_obj.pos.y = 0
-        elseif futurefunk_obj.pos.x < 100 then
-            futurefunk_obj.pos.x = futurefunk_obj.pos.x + 1
-        elseif futurefunk_obj.pos.y < 27 then
-            futurefunk_obj.pos.x = 0
-            futurefunk_obj.pos.y = futurefunk_obj.pos.y + 1
-        end
-    end
-end
