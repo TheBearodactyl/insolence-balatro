@@ -1,5 +1,6 @@
 import requests
 import os
+import subprocess
 
 
 def download_latest_release_assets(owner, repo, download_dir="."):
@@ -33,7 +34,13 @@ def download_latest_release_assets(owner, repo, download_dir="."):
             print(f"Failed to download {asset_name}: HTTP {r.status_code}")
 
 
+def update_submodule():
+    subprocess.run(["git", "submodule", "update", "--init", "--recursive", "--remote"])
+    print("Updated local clone of lib repo")
+
+
 if __name__ == "__main__":
     owner = "thebearodactyl"
     repo = "insolence-lib"
+    update_submodule()
     download_latest_release_assets(owner, repo, download_dir="./lib")
