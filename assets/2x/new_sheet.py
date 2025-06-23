@@ -18,10 +18,8 @@ def create_transparent_sprite_sheet(
     total_width = tile_width * columns
     total_height = tile_height * rows
 
-    # Create a new image with RGBA mode (A for alpha channel)
     img = Image.new("RGBA", (total_width, total_height), (0, 0, 0, 0))
 
-    # Save the image
     img.save(output_file)
     print(f"Created transparent sprite sheet: {output_file}")
     print(f"Dimensions: {total_width}x{total_height} pixels")

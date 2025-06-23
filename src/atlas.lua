@@ -35,8 +35,8 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "metroman",
-    px = 71 / 2,
-    py = 95 / 2,
+    px = 71,
+    py = 95,
     path = "metroman.png",
 })
 
