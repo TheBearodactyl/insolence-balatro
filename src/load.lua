@@ -368,6 +368,11 @@ insolence.mod.optional_features = {
 local futurefunk_dt, garry_dt, metroman_dt, natsuri_dt, rotoscoped_dt, speedpaint_dt = 0, 0, 0, 0, 0, 0
 local orig_gu = Game.update
 
+--- How to use `libinsolence.animate_center`:
+--- 
+--- 1 - Create a spritesheet with each frame of your animation going from left to right.
+--- 2 - Create an atlas using that spritesheet as the atlas
+--- 3 - Create a center using that atlas. Remember the key for that atlas
 function Game:update(dt)
 	orig_gu(self, dt)
 

@@ -39,7 +39,8 @@ insolence = {
 			"wildin",
 			"woah_joker",
 			"future_funk",
-			"speedpaint"
+			"speedpaint",
+			"nineeleven"
 		},
 		rarities = {
 			"insolent",
