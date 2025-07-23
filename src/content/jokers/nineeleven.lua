@@ -1,3 +1,8 @@
+SMODS.Sound {
+    key = "911",
+    path = "911.mp3"
+}
+
 SMODS.Joker {
     key = "nineeleven",
     atlas = "jokers",
@@ -33,6 +38,15 @@ SMODS.Joker {
                 self.config.extra.mult
             }
         }
+    end,
+    add_to_deck = function (self, card, from_debuff)
+        G.E_MANAGER:add_event(Event {
+            func = function ()
+                play_sound("ins_911")
+
+                return true
+            end
+        })
     end,
     calculate = function(self, card, context)
         if context.end_of_round and not context.repetition and not context.blueprint then
