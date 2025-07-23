@@ -40,7 +40,8 @@ insolence = {
 			"woah_joker",
 			"future_funk",
 			"speedpaint",
-			"nineeleven"
+			"nineeleven",
+			"monika"
 		},
 		rarities = {
 			"insolent",
