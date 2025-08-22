@@ -5,84 +5,233 @@ local util = require("bearo.utils")
 insolence = {
 	content = {
 		achievements = {
-			"boob_achievements",
+			["boob_achievements"] ={
+				enabled = true
+			},
 		},
 		enhancements = {
-			"unoriginal",
-			"woah",
-			"bubbly",
+			["unoriginal"] ={
+				enabled = true
+			},
+			["woah"] ={
+				enabled = true
+			},
+			["bubbly"] ={
+				enabled = true
+			},
 		},
 		blinds = {
-			"chris_rock",
-			"will_smith",
+			["chris_rock"] = {
+				enabled = true
+			},
+			["will_smith"] = {
+				enabled = true
+			},
 		},
 		jokers = {
-			"boobs",
-			"brook",
-			"eternalinator",
-			"fingertips",
-			"franky",
-			"garry",
-			"italian",
-			"metroman",
-			"mugiwara",
-			"nami",
-			"natsuri",
-			"nice_day_out",
-			"pizza",
-			"printer_ink",
-			"probably",
-			"rotoscoped",
-			"stained_glass",
-			"stopped_heart",
-			"the_watcher",
-			"wildin",
-			"woah_joker",
-			"future_funk",
-			"speedpaint",
-			"nineeleven",
-			"monika"
+			["boobs"] = {
+				enabled = true
+			},
+			["brook"] = {
+				enabled = true
+			},
+			["eternalinator"] = {
+				enabled = true
+			},
+			["fingertips"] = {
+				enabled = true
+			},
+			["franky"] = {
+				enabled = true
+			},
+			["garry"] = {
+				enabled = true
+			},
+			["italian"] = {
+				enabled = true
+			},
+			["metroman"] = {
+				enabled = true
+			},
+			["mugiwara"] = {
+				enabled = true
+			},
+			["nami"] = {
+				enabled = true
+			},
+			["natsuri"] = {
+				enabled = true
+			},
+			["nice_day_out"] = {
+				enabled = true
+			},
+			["pizza"] = {
+				enabled = true
+			},
+			["printer_ink"] = {
+				enabled = true
+			},
+			["probably"] = {
+				enabled = true
+			},
+			["rotoscoped"] = {
+				enabled = true
+			},
+			["stained_glass"] = {
+				enabled = true
+			},
+			["stopped_heart"] = {
+				enabled = true
+			},
+			["the_watcher"] = {
+				enabled = true
+			},
+			["wildin"] = {
+				enabled = true
+			},
+			["woah_joker"] = {
+				enabled = true
+			},
+			["future_funk"] = {
+				enabled = true
+			},
+			["speedpaint"] = {
+				enabled = true
+			},
+			["nineeleven"] = {
+				enabled = true
+			},
+			["monika"] = {
+				enabled = true
+			},
 		},
 		rarities = {
-			"insolent",
-			"strawhat",
+			["insolent"] = {
+				enabled = true
+			},
+			["strawhat"] = {
+				enabled = true
+			},
 		},
 		editions = {
-			"ace",
-			"aurora",
-			"bisexual",
-			"bocchi",
-			"bugged",
-			"cellular",
-			"edgy",
-			"equalize",
-			"fractal",
-			"gay",
-			"kleinian",
-			"lesbian",
-			"lightshow",
-			"pinku",
-			"synth",
-			"tiled",
-			"trans",
-			"universe",
-			"vaporwave",
-			"voronoi",
-			"wavy",
+			["ace"] = {
+				enabled = true
+			},
+			
+			["aurora"] = {
+				enabled = true
+			},
+			
+			["bisexual"] = {
+				enabled = true
+			},
+			
+			["bocchi"] = {
+				enabled = true
+			},
+			
+			["bugged"] = {
+				enabled = true
+			},
+			
+			["cellular"] = {
+				enabled = true
+			},
+			
+			["edgy"] = {
+				enabled = true
+			},
+			
+			["equalize"] = {
+				enabled = true
+			},
+			
+			["fractal"] = {
+				enabled = true
+			},
+			
+			["gay"] = {
+				enabled = true
+			},
+			
+			["kleinian"] = {
+				enabled = true
+			},
+			
+			["lesbian"] = {
+				enabled = true
+			},
+			
+			["lightshow"] = {
+				enabled = true
+			},
+			
+			["pinku"] = {
+				enabled = true
+			},
+			
+			["synth"] = {
+				enabled = true
+			},
+			
+			["tiled"] = {
+				enabled = true
+			},
+			
+			["trans"] = {
+				enabled = true
+			},
+			
+			["universe"] = {
+				enabled = true
+			},
+			
+			["vaporwave"] = {
+				enabled = true
+			},
+			
+			["voronoi"] = {
+				enabled = true
+			},
+			
+			["wavy"] = {
+				enabled = true
+			},
+			
 		},
 		consumables = {
-			"borealis",
-			"nullptr",
-			"soup",
-			"toaster_bath",
-			"supernova",
-			"flower",
-			"tiler",
-			"wulz",
+			["borealis"] = {
+				enabled = true
+			},
+			["nullptr"] = {
+				enabled = true
+			},
+			["soup"] = {
+				enabled = true
+			},
+			["toaster_bath"] = {
+				enabled = true
+			},
+			["supernova"] = {
+				enabled = true
+			},
+			["flower"] = {
+				enabled = true
+			},
+			["tiler"] = {
+				enabled = true
+			},
+			["wulz"] = {
+				enabled = true
+			},
 		},
 		hands = {
-			"aaaaaa",
-			"three_pair",
+			["aaaaaa"] = {
+				enabled = true
+			},
+			["three_pair"] = {
+				enabled = true
+			},
 		},
 	},
 	mod = SMODS.current_mod,

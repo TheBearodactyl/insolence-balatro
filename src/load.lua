@@ -35,12 +35,13 @@ end
 --- @field mod_cond fun(mod_id: string, if_exists: any, otherwise: any): any
 --- @field count_num_of_joker fun(prefix: string, key: string): integer
 --- @field register_items fun(items: string[], path: string)
+--- @field register_items_adv fun(items: table, path: string)
 --- @field create_gradient fun(key: string, colors: string[]): SMODS.Gradient
 --- @field animate_center fun(center_id: string, center_dt: string, dt: number, speed: number, target_x: integer, target_y: integer, max_x: integer, max_y: integer)
 libinsolence = require("libinsolence")
 
-for k, _ in pairs(insolence.content) do
-	libinsolence.register_items(insolence.content[k], "src/content/" .. k)
+for k, v in pairs(insolence.content) do
+	libinsolence.register_items_adv(insolence.content[k], "src/content/" .. k)
 end
 
 local function calculate_scalefactor(text)
