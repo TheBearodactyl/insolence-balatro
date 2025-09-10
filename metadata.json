@@ -8,11 +8,11 @@
   "description": "woah",
   "main_file": "src/main.lua",
   "badge_colour": "ff00bb",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "priority": 10398093047,
   "dependencies": [
-    "Talisman (>=2.0.9)",
-    "Steamodded (>=1.0.0~BETA-0711a)",
+    "Talisman (>=2.5.0)",
+    "Steamodded (>=1.0.0-beta-0827c)",
     "Lovely (>=0.7.1)"
   ]
 }
