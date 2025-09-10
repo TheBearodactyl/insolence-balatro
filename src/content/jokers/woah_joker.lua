@@ -6,7 +6,6 @@ function Controller:L_cursor_press(x, y)
     end
 end
 
--- Released left mouse button
 local lcrref = Controller.L_cursor_release
 function Controller:L_cursor_release(x, y)
     lcrref(self, x, y)
