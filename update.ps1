@@ -79,4 +79,4 @@ function Get-LatestReleaseAssets
 Update-Submodule
 Get-LatestReleaseAssets -Owner $Owner -Repo $Repo -DownloadDir $DownloadDir
 
-Move-Item -Path "$PSScriptRoot\lib\liblibinsolence.so" "$PSScriptRoot\lib\libinsolence.so"
+Move-Item -Force -Path "$PSScriptRoot\lib\liblibinsolence.so" "$PSScriptRoot\lib\libinsolence.so"
